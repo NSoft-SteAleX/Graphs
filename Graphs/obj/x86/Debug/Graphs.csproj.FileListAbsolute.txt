@@ -5,3 +5,12 @@ F:\Inst\АиСОД\Graph\Graphs\Graphs\obj\x86\Debug\Graphs.MainForm.resources
 F:\Inst\АиСОД\Graph\Graphs\Graphs\obj\x86\Debug\Graphs.Properties.Resources.resources
 F:\Inst\АиСОД\Graph\Graphs\Graphs\obj\x86\Debug\Graphs.exe
 F:\Inst\АиСОД\Graph\Graphs\Graphs\obj\x86\Debug\Graphs.pdb
+C:\Users\AlexandrFox\Graphs\Graphs\bin\Debug\Graphs.exe
+C:\Users\AlexandrFox\Graphs\Graphs\bin\Debug\Graphs.pdb
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\Graphs.MainForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\Graphs.Properties.Resources.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\Graphs.exe
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\Graphs.pdb

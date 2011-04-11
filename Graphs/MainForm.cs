@@ -14,7 +14,7 @@ namespace Graphs
         public MainForm()
         {
             InitializeComponent();
-            var gr = new SimpleStaticGraph<int, int>(6, SimpleStaticGraph<int,int>.GraphType.NotOriented, SimpleStaticGraph<int,int>.GraphFormat.ListGraph);
+            var gr = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(6, SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.GraphType.NotOriented, SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.GraphFormat.ListGraph);
             logBox.AppendText("M-Graph:\n");
 
             
@@ -23,6 +23,12 @@ namespace Graphs
             gr.InsertEdge(0, 5);
             gr.InsertEdge(1, 2);
             gr.InsertEdge(2, 3);
+            gr.SetEdge(2, 3, new EdgeDescriptor(2.25));
+            gr.SetVertex(4, new VertexDescriptor("Test"));
+            gr.SetVertex(5, new VertexDescriptor("Test2"));
+            gr.SetEdge(0, 4, new EdgeDescriptor(2.125));
+            var test = gr.GetVertex(5);
+            MessageBox.Show(test.name);
         }
     }
 }
