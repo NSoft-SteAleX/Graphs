@@ -18,12 +18,22 @@ namespace Graphs
         [Serializable]
         private class Vertex
         {
+            public enum Colors { Black, White, None }
+
             public int Number { get; private set; }
+            public Colors Color { get; set; }
             public VertexDataType Data { get; set; }
 
-            public Vertex(int number) : this(number, default(VertexDataType)) { }
-            public Vertex(int number, VertexDataType data)
+            public Vertex(int number) : this(number, Colors.None) { }
+            public Vertex(int number, VertexDataType data) : this(number, Colors.None, data) { }
+            public Vertex(int number, Colors color)
             {
+                this.Color = color;
+                this.Number = number;
+            }
+            public Vertex(int number, Colors color, VertexDataType data)
+            {
+                this.Color = color;
                 this.Data = data;
                 this.Number = number;
             }
@@ -33,7 +43,7 @@ namespace Graphs
                 {
                     Vertex temp = (Vertex)obj;
 
-                    if (temp.Number == this.Number && temp.Data.Equals(this.Data))
+                    if (temp.Number == this.Number && temp.Color == this.Color && temp.Data.Equals(this.Data))
                     {
                         return true;
                     }
@@ -55,15 +65,19 @@ namespace Graphs
         {
             public int StartVertex { get; private set; }
             public int EndVertex { get; private set; }
-            public EdgeDataType Data { get; set; }
+            public EdgeDataType Weight { get; set; }
 
             public Edge() { }
-            public Edge(int startVertex, int endVertex) : this(startVertex, endVertex, default(EdgeDataType)) { }
-            public Edge(int startVertex, int endVertex, EdgeDataType data)
+            public Edge(int startVertex, int endVertex)
             {
                 this.StartVertex = startVertex;
                 this.EndVertex = endVertex;
-                this.Data = data;
+            }
+            public Edge(int startVertex, int endVertex, EdgeDataType weight)
+            {
+                this.StartVertex = startVertex;
+                this.EndVertex = endVertex;
+                this.Weight = weight;
             }
             public override bool Equals(object obj)
             {
@@ -71,8 +85,8 @@ namespace Graphs
                 {
                     Edge temp = (Edge)obj;
 
-                    if (temp.StartVertex == this.StartVertex && temp.EndVertex == this.EndVertex
-                        && temp.Data.Equals(this.Data))
+                    if (temp.StartVertex == this.StartVertex && temp.EndVertex == this.EndVertex 
+                        && temp.Weight.Equals(this.Weight))
                     {
                         return true;
                     }
@@ -107,14 +121,11 @@ namespace Graphs
             public int EdgeCount { get; set; }
             public GraphType Direction { get; set; }
 
-            //Абстрактные методы
             public abstract bool InsertEdge(int v1, int v2);
             public abstract bool DeleteEdge(int v1, int v2);
             public abstract bool IsEdge(int v1, int v2);
             public abstract EdgeDataType GetEdge(int v1, int v2);
-            public abstract bool SetEdge(int v1, int v2, EdgeDataType data);
-            public abstract VertexDataType GetVertex(int v);
-            public abstract bool SetVertex(int v, VertexDataType data);
+            public abstract bool SetEdge(int v1, int v2, EdgeDataType w);
 
             /// <summary>
             /// Вставка случайных рёбер
@@ -229,40 +240,21 @@ namespace Graphs
             {
                 if (matrix[v1, v2] != null)
                 {
-                    return matrix[v1, v2].Data;
+                    return matrix[v1, v2].Weight;
                 }
                 else throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
             }
-            public override bool SetEdge(int v1, int v2, EdgeDataType data)
+            public override bool SetEdge(int v1, int v2, EdgeDataType w)
             {
                 if (matrix[v1, v2] != null)
                 {
-                    matrix[v1, v2].Data = data;
+                    matrix[v1, v2].Weight = w;
 
                     if (Direction == GraphType.NotOriented)
                     {
-                        matrix[v2, v1].Data = data;
+                        matrix[v2, v1].Weight = w;
                     }
 
-                    return true;
-                }
-
-                return false;
-            }
-            public override VertexDataType GetVertex(int v)
-            {
-                if (v >= 0 && v < VertexCount)
-                {
-                    return vertexArray[v].Data;
-                }
-                else
-                    throw new NullReferenceException("Вершина с номером " + v + " не существует!");
-            }
-            public override bool SetVertex(int v, VertexDataType data)
-            {
-                if (v >= 0 && v < VertexCount)
-                {
-                    vertexArray[v].Data = data;
                     return true;
                 }
 
@@ -395,10 +387,10 @@ namespace Graphs
             {
                 Edge e = adjacencyList[v1].Find(pair => pair.Key == v2).Value;
 
-                if(e != null) return e.Data;
+                if(e != null) return e.Weight;
                 else throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
             }
-            public override bool SetEdge(int v1, int v2, EdgeDataType data)
+            public override bool SetEdge(int v1, int v2, EdgeDataType w)
             {
                 if (Direction == GraphType.NotOriented)
                 {
@@ -407,7 +399,7 @@ namespace Graphs
 
                     if (e1 != null && e2 != null)
                     {
-                        e1.Data = e2.Data = data;
+                        e1.Weight = e2.Weight = w;
                         return true;
                     }
                 }
@@ -416,26 +408,8 @@ namespace Graphs
                     Edge e = adjacencyList[v1].Find(pair => pair.Key == v2).Value;
                     if (e != null)
                     {
-                        e.Data = data;
+                        e.Weight = w;
                     }
-                }
-
-                return false;
-            }
-            public override VertexDataType GetVertex(int v)
-            {
-                if (v >= 0 && v < VertexCount)
-                {
-                    return vertexArray[v].Data;
-                }
-                else
-                    throw new NullReferenceException("Вершина с номером " + v + " не существует!");
-            }
-            public override bool SetVertex(int v, VertexDataType data)
-            {
-                if (v >= 0 && v < VertexCount)
-                {
-                    vertexArray[v].Data = data;
                 }
 
                 return false;
@@ -642,36 +616,14 @@ namespace Graphs
         }
 
         /// <summary>
-        /// Установка данных ребра
+        /// Установка веса ребра
         /// </summary>
         /// <param name="v1">Начальная вершина</param>
         /// <param name="v2">Конечная вершина</param>
-        /// <param name="data">Данные вершины</param>
         /// <returns></returns>
-        public bool SetEdge(int v1, int v2, EdgeDataType data)
+        public bool SetEdge(int v1, int v2, EdgeDataType w)
         {
-            return graph.SetEdge(v1, v2, data);
-        }
-
-        /// <summary>
-        /// Получение данных вершины
-        /// </summary>
-        /// <param name="v">Номер вершины</param>
-        /// <returns></returns>
-        public VertexDataType GetVertex(int v)
-        {
-            return graph.GetVertex(v);
-        }
-
-        /// <summary>
-        /// Установка данных вершины
-        /// </summary>
-        /// <param name="v">Номер вершины</param>
-        /// <param name="data">Данные вершины</param>
-        /// <returns></returns>
-        public bool SetVertex(int v, VertexDataType data)
-        {
-            return graph.SetVertex(v, data);
+            return graph.SetEdge(v1, v2, w);
         }
 
         /// <summary>
