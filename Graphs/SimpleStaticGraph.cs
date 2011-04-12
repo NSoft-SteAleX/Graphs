@@ -8,6 +8,15 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Graphs
 {
+    /// <summary>
+    /// Основной класс простого статического графа. Реализует M- и L-
+    /// представления графа.
+    /// 
+    /// @author Александр Миронов
+    /// @date 11.04.2011
+    /// </summary>
+    /// <typeparam name="VertexDataType">Тип данных вершины</typeparam>
+    /// <typeparam name="EdgeDataType">Тип данных ребра</typeparam>
     [Serializable]
     public class SimpleStaticGraph<VertexDataType, EdgeDataType> : ICloneable
     {
