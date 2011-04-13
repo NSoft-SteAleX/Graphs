@@ -9,6 +9,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace Graphs
 {
     /// <summary>
+    /// Перечисление форм графов
+    /// </summary>
+    public enum GraphFormat { MatrixGraph, ListGraph }
+
+    /// <summary>
+    /// Перечисление типов графов
+    /// </summary>
+    public enum GraphType { Oriented, NotOriented }
+
+    /// <summary>
     /// Основной класс простого статического графа. Реализует M- и L-
     /// представления графа.
     /// 
@@ -94,16 +104,6 @@ namespace Graphs
                 return base.GetHashCode();
             }
         }
-
-        /// <summary>
-        /// Перечисление форм графов
-        /// </summary>
-        public enum GraphFormat { MatrixGraph, ListGraph }
-        
-        /// <summary>
-        /// Перечисление типов графов
-        /// </summary>
-        public enum GraphType { Oriented, NotOriented }
 
         /// <summary>
         /// Основной абстрактный класс графов,

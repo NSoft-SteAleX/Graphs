@@ -35,6 +35,9 @@ namespace Graphs
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
+            typeSelectBox.SelectedItem = typeSelectBox.Items[0];
+            orientSelectBox.SelectedItem = orientSelectBox.Items[0];
+
             gdi = renderFrame.CreateGraphics();
             gdi.SmoothingMode = SmoothingMode.HighQuality;
             gdi.CompositingQuality = CompositingQuality.HighQuality;
@@ -50,11 +53,43 @@ namespace Graphs
         {
             if (vertexCountText.Text.Length > 0)
             {
-                graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(Convert.ToInt32(vertexCountText.Text),
-                    SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.GraphType.NotOriented,
-                    SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.GraphFormat.ListGraph);
+                GraphFormat format;
+                GraphType type;
+                string _format, _type;
+
+                if (typeSelectBox.SelectedIndex == 0)
+                {
+                    format = GraphFormat.MatrixGraph;
+                    _format = "Матрица смежностей";
+                }
+                else
+                {
+                    format = GraphFormat.ListGraph;
+                    _format = "Список смежностей";
+                }
+
+                if (orientSelectBox.SelectedIndex == 0)
+                {
+                    type = GraphType.NotOriented;
+                    _type = "Неориентированный";
+                }
+                else
+                {
+                    type = GraphType.Oriented;
+                    _type = "Ориентированный";
+                }
+
+                //Создаём объект графа
+                graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(Convert.ToInt32(vertexCountText.Text), type, format);
+
+                //Установка лейбла с инфо
+                graphInfoLabel.Text = "Вершин: " + vertexCountText.Text + ", " + _format + ", " + _type;
 
                 PrintGraph();
+            }
+            else
+            {
+                MessageBox.Show("Введите число вершин.");
             }
         }
 
@@ -75,11 +110,28 @@ namespace Graphs
         }
 
         /// <summary>
+        /// Удаление ребра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteEdgeButton_Click(object sender, EventArgs e)
+        {
+            if (vertexOne != -1 && vertexTwo != -1)
+            {
+                graph.DeleteEdge(vertexOne, vertexTwo);
+                vertexOne = vertexTwo = -1;
+            }
+
+            PrintGraph();
+        }
+
+        /// <summary>
         /// Рендеринг графа
         /// </summary>
         private void PrintGraph()
         {
             double divconst = graph.VertexCount() / 2d;
+            gdi.Clear(Color.Gray);
             renderFrame.Controls.Clear();
             int currx = 0, curry = 0;
 
@@ -111,8 +163,8 @@ namespace Graphs
                 p.BackColor = Color.Transparent;
                 p.MouseClick += new MouseEventHandler(p_MouseClick);
                 p.Size = new Size(edgeSize, edgeSize);
-                currx = (int)(300 + Math.Cos((Math.PI / divconst) * i) * 140);
-                curry = (int)(200 - Math.Sin((Math.PI / divconst) * i) * 125);
+                currx = (int)(275 + Math.Cos((Math.PI / divconst) * i) * 170);
+                curry = (int)(180 - Math.Sin((Math.PI / divconst) * i) * 155);
                 p.Location = new Point(currx, curry);
 
                 renderFrame.Controls.Add(p);
@@ -127,8 +179,8 @@ namespace Graphs
 
                 while (iter.Current() != -1)
                 {
-                    Control c1 = GetControlbyName(i.ToString());
-                    Control c2 = GetControlbyName(iter.Current().ToString());
+                    Control c1 = renderFrame.Controls[i];
+                    Control c2 = renderFrame.Controls[iter.Current()];
                     Point p1 = c1.Location + new Size(c1.Size.Width / 2, c1.Size.Height / 2);
                     Point p2 = c2.Location + new Size(c2.Size.Width / 2, c2.Size.Height / 2);
                     gdi.DrawLine(pen, p1, p2);
@@ -186,21 +238,6 @@ namespace Graphs
                 MessageBox.Show("Введите числовое значение!");
                 vertexCountText.Text = "0";
             }
-        }
-
-        /// <summary>
-        /// Получение контрола по имени
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        private Control GetControlbyName(string name)
-        {
-            foreach (Control c in renderFrame.Controls)
-            {
-                if (c.Name == name) return c;
-            }
-            
-            throw new Exception("UIerror");
         }
     }
 }
