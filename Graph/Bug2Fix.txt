@@ -1,0 +1,12 @@
+﻿
+
+Listbased:
+-Fix async weight assignement in undirected mode (not a bug)
+-Fix some functions: force to recive data from link relation map,instead of from edge array
+-Think about double edges in undirected mode
+-Fix in addedge perfomance failure "data[start,end].Add(GetVertexById(end));"
+
+
+MatrixBased:
+//-Compile 2 edge existance ckeck functions into one
+//-Edge existance check
