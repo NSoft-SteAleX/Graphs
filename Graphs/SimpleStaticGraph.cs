@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -25,10 +22,10 @@ namespace Graphs
     /// @author Александр Миронов
     /// @date 11.04.2011
     /// </summary>
-    /// <typeparam name="VertexDataType">Тип данных вершины</typeparam>
-    /// <typeparam name="EdgeDataType">Тип данных ребра</typeparam>
+    /// <typeparam name="TVertexDataType">Тип данных вершины</typeparam>
+    /// <typeparam name="TEdgeDataType">Тип данных ребра</typeparam>
     [Serializable]
-    public class SimpleStaticGraph<VertexDataType, EdgeDataType> : ICloneable
+    public class SimpleStaticGraph<TVertexDataType, TEdgeDataType> : ICloneable
     {
         #region Nested Classes
         /// <summary>
@@ -38,21 +35,20 @@ namespace Graphs
         private class Vertex
         {
             public int Number { get; private set; }
-            public VertexDataType Data { get; set; }
+            public TVertexDataType Data { get; set; }
 
-            public Vertex(int number) : this(number, default(VertexDataType)) { }
-            public Vertex(int number, VertexDataType data)
+            public Vertex(int number, TVertexDataType data = default(TVertexDataType))
             {
-                this.Data = data;
-                this.Number = number;
+                Data = data;
+                Number = number;
             }
             public override bool Equals(object obj)
             {
-                if (obj is Vertex && obj != null)
+                if (obj is Vertex)
                 {
-                    Vertex temp = (Vertex)obj;
+                    var temp = (Vertex)obj;
 
-                    if (temp.Number == this.Number && temp.Data.Equals(this.Data))
+                    if (temp.Number == Number && temp.Data.Equals(Data))
                     {
                         return true;
                     }
@@ -74,24 +70,23 @@ namespace Graphs
         {
             public int StartVertex { get; private set; }
             public int EndVertex { get; private set; }
-            public EdgeDataType Data { get; set; }
+            public TEdgeDataType Data { get; set; }
 
             public Edge() { }
-            public Edge(int startVertex, int endVertex) : this(startVertex, endVertex, default(EdgeDataType)) { }
-            public Edge(int startVertex, int endVertex, EdgeDataType data)
+            public Edge(int startVertex, int endVertex, TEdgeDataType data = default(TEdgeDataType))
             {
-                this.StartVertex = startVertex;
-                this.EndVertex = endVertex;
-                this.Data = data;
+                StartVertex = startVertex;
+                EndVertex = endVertex;
+                Data = data;
             }
             public override bool Equals(object obj)
             {
-                if (obj is Edge && obj != null)
+                if (obj is Edge)
                 {
-                    Edge temp = (Edge)obj;
+                    var temp = (Edge)obj;
 
-                    if (temp.StartVertex == this.StartVertex && temp.EndVertex == this.EndVertex
-                        && temp.Data.Equals(this.Data))
+                    if (temp.StartVertex == StartVertex && temp.EndVertex == EndVertex
+                        && temp.Data.Equals(Data))
                     {
                         return true;
                     }
@@ -112,18 +107,18 @@ namespace Graphs
         [Serializable]
         private abstract class GeneralGraph
         {
-            public int VertexCount { get; set; }
-            public int EdgeCount { get; set; }
-            public GraphType Direction { get; set; }
+            public int VertexCount { get; protected set; }
+            public int EdgeCount { get; protected set; }
+            public GraphType Direction { get; protected set; }
 
             //Абстрактные методы
             public abstract bool InsertEdge(int v1, int v2);
             public abstract bool DeleteEdge(int v1, int v2);
             public abstract bool IsEdge(int v1, int v2);
-            public abstract EdgeDataType GetEdge(int v1, int v2);
-            public abstract bool SetEdge(int v1, int v2, EdgeDataType data);
-            public abstract VertexDataType GetVertex(int v);
-            public abstract bool SetVertex(int v, VertexDataType data);
+            public abstract TEdgeDataType GetEdge(int v1, int v2);
+            public abstract bool SetEdge(int v1, int v2, TEdgeDataType data);
+            public abstract TVertexDataType GetVertex(int v);
+            public abstract bool SetVertex(int v, TVertexDataType data);
 
             /// <summary>
             /// Вставка случайных рёбер
@@ -131,14 +126,17 @@ namespace Graphs
             /// <param name="randomEdgesCount"></param>
             protected void InsertRandomEdges(int randomEdgesCount)
             {
-                Random rand = new Random(unchecked((int)DateTime.Now.Ticks));
+                var rand = new Random(unchecked((int)DateTime.Now.Ticks));
 
                 for (int i = 0; i != randomEdgesCount; i++)
                 {
                     int v1 = rand.Next(0, VertexCount);
                     int v2 = rand.Next(0, VertexCount);
 
-                    InsertEdge(v1, v2);
+                    if(!InsertEdge(v1, v2))
+                    {
+                        i--;
+                    }
                 }
             }
 
@@ -151,7 +149,7 @@ namespace Graphs
 
                 public GeneralIterator(int v)
                 {
-                    this.V = v;
+                    V = v;
                 }
                 public abstract void Begin();
                 public abstract bool Next();
@@ -170,17 +168,17 @@ namespace Graphs
             /// <summary>
             /// Массив вершин
             /// </summary>
-            private Vertex[] vertexArray;
+            private readonly Vertex[] vertexArray;
 
             /// <summary>
             /// Матрица смежностей
             /// </summary>
-            private Edge[,] matrix;
+            private readonly Edge[,] matrix;
 
             public MatrixGraph(int vertexCount, int randomEdgesCount, GraphType direction)
             {
-                this.VertexCount = vertexCount;
-                this.Direction = direction;
+                VertexCount = vertexCount;
+                Direction = direction;
 
                 //Инициализация массивов
                 matrix = new Edge[vertexCount, vertexCount];
@@ -227,22 +225,18 @@ namespace Graphs
             }
             public override bool IsEdge(int v1, int v2)
             {
-                if (matrix[v1, v2] != null)
-                {
-                    return true;
-                }
-
-                return false;
+                return matrix[v1, v2] != null;
             }
-            public override EdgeDataType GetEdge(int v1, int v2)
+
+            public override TEdgeDataType GetEdge(int v1, int v2)
             {
                 if (matrix[v1, v2] != null)
                 {
                     return matrix[v1, v2].Data;
                 }
-                else throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
+                throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
             }
-            public override bool SetEdge(int v1, int v2, EdgeDataType data)
+            public override bool SetEdge(int v1, int v2, TEdgeDataType data)
             {
                 if (matrix[v1, v2] != null)
                 {
@@ -258,16 +252,15 @@ namespace Graphs
 
                 return false;
             }
-            public override VertexDataType GetVertex(int v)
+            public override TVertexDataType GetVertex(int v)
             {
                 if (v >= 0 && v < VertexCount)
                 {
                     return vertexArray[v].Data;
                 }
-                else
-                    throw new NullReferenceException("Вершина с номером " + v + " не существует!");
+                throw new NullReferenceException("Вершина с номером " + v + " не существует!");
             }
-            public override bool SetVertex(int v, VertexDataType data)
+            public override bool SetVertex(int v, TVertexDataType data)
             {
                 if (v >= 0 && v < VertexCount)
                 {
@@ -284,10 +277,10 @@ namespace Graphs
                 private int I { get; set; }
                 private readonly MatrixGraph Graph;
 
-                public Iterator(ref GeneralGraph graph, int v) : base(v) 
+                public Iterator(GeneralGraph graph, int v) : base(v) 
                 {
-                    this.Graph = (MatrixGraph)graph;
-                    this.I = -1;
+                    Graph = (MatrixGraph)graph;
+                    I = -1;
                 }
                 public override void Begin()
                 {
@@ -298,14 +291,14 @@ namespace Graphs
                 {
                     for (I = Graph.VertexCount - 1; I != -1; I--)
                     {
-                        if (Graph.matrix[V, I] is Edge) break;
+                        if (Graph.matrix[V, I] != null) break;
                     }
                 }
                 public override bool Next()
                 {
                     for (I++; I < Graph.VertexCount; I++)
                     {
-                        if (Graph.matrix[V, I] is Edge) return true;
+                        if (Graph.matrix[V, I] != null) return true;
                     }
 
                     return false;
@@ -331,17 +324,17 @@ namespace Graphs
             /// <summary>
             /// Массив вершин
             /// </summary>
-            private Vertex[] vertexArray;
+            private readonly Vertex[] vertexArray;
             
             /// <summary>
             /// Список смежностей
             /// </summary>
-            private List<KeyValuePair<int, Edge>>[] adjacencyList;
+            private readonly List<KeyValuePair<int, Edge>>[] adjacencyList;
 
             public ListGraph(int vertexCount, int randomEdgesCount, GraphType direction)
             {
-                this.VertexCount = vertexCount;
-                this.Direction = direction;
+                VertexCount = vertexCount;
+                Direction = direction;
 
                 //Инициализация списков
                 adjacencyList = new List<KeyValuePair<int, Edge>>[vertexCount];
@@ -393,21 +386,16 @@ namespace Graphs
             }
             public override bool IsEdge(int v1, int v2)
             {
-                if (adjacencyList[v1].Exists(pair => pair.Key == v2))
-                {
-                    return true;
-                }
-
-                return false;
+                return adjacencyList[v1].Exists(pair => pair.Key == v2);
             }
-            public override EdgeDataType GetEdge(int v1, int v2)
+            public override TEdgeDataType GetEdge(int v1, int v2)
             {
                 Edge e = adjacencyList[v1].Find(pair => pair.Key == v2).Value;
 
                 if(e != null) return e.Data;
-                else throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
+                throw new NullReferenceException("Ребро, соединяющее точки " + v1 + " и " + v2 + " не существует!");
             }
-            public override bool SetEdge(int v1, int v2, EdgeDataType data)
+            public override bool SetEdge(int v1, int v2, TEdgeDataType data)
             {
                 if (Direction == GraphType.NotOriented)
                 {
@@ -431,16 +419,15 @@ namespace Graphs
 
                 return false;
             }
-            public override VertexDataType GetVertex(int v)
+            public override TVertexDataType GetVertex(int v)
             {
                 if (v >= 0 && v < VertexCount)
                 {
                     return vertexArray[v].Data;
                 }
-                else
-                    throw new NullReferenceException("Вершина с номером " + v + " не существует!");
+                throw new NullReferenceException("Вершина с номером " + v + " не существует!");
             }
-            public override bool SetVertex(int v, VertexDataType data)
+            public override bool SetVertex(int v, TVertexDataType data)
             {
                 if (v >= 0 && v < VertexCount)
                 {
@@ -449,55 +436,43 @@ namespace Graphs
 
                 return false;
             }
-            
+
             //Класс итератора
             public class Iterator : GeneralIterator
             {
-                private readonly ListGraph Graph;
-                private List<KeyValuePair<int, Edge>>.Enumerator listIter;
+                private readonly ListGraph _graph;
+                private List<KeyValuePair<int, Edge>>.Enumerator _listIter;
 
-                public Iterator(ref GeneralGraph graph, int v) : base(v)
+                public Iterator(GeneralGraph graph, int v) : base(v)
                 {
-                    this.Graph = (ListGraph)graph;
-                    this.listIter = Graph.adjacencyList[V].GetEnumerator();
-                    this.listIter.MoveNext();
+                    _graph = (ListGraph)graph;
+                    _listIter = _graph.adjacencyList[V].GetEnumerator();
+                    _listIter.MoveNext();
                 }
                 public override void Begin()
                 {
-                    listIter = Graph.adjacencyList[V].GetEnumerator();
-                    listIter.MoveNext();
+                    _listIter = _graph.adjacencyList[V].GetEnumerator();
+                    _listIter.MoveNext();
                 }
                 public override void End()
                 {
-                    listIter = Graph.adjacencyList[V].GetEnumerator();
-                    for (int i = 0; i != Graph.adjacencyList[V].Count; i++)
-                        listIter.MoveNext();
+                    _listIter = _graph.adjacencyList[V].GetEnumerator();
+                    for (int i = 0; i != _graph.adjacencyList[V].Count; i++)
+                    {
+                        _listIter.MoveNext();
+                    }
                 }
                 public override bool Next()
                 {
-                    return listIter.MoveNext();
+                    return _listIter.MoveNext();
                 }
                 public override bool IsAlive()
                 {
-                    if (listIter.Current.Value != null)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    return _listIter.Current.Value != null;
                 }
                 public override int Current()
                 {
-                    if (IsAlive())
-                    {
-                        return listIter.Current.Key;
-                    }
-                    else
-                    {
-                        return -1;
-                    }
+                    return IsAlive() ? _listIter.Current.Key : -1;
                 }
             }
         }
@@ -507,25 +482,25 @@ namespace Graphs
         /// </summary>
         public class Iterator
         {
-            private readonly SimpleStaticGraph<VertexDataType, EdgeDataType> SimpleGraph;
-            private readonly GeneralGraph.GeneralIterator Iter;
+            private readonly SimpleStaticGraph<TVertexDataType, TEdgeDataType> _simpleGraph;
+            private readonly GeneralGraph.GeneralIterator _iter;
 
             /// <summary>
             /// Конструктор итератора
             /// </summary>
-            /// <param name="_simpleGraph">Объект простого статического графа</param>
+            /// <param name="simpleGraph">Объект простого статического графа</param>
             /// <param name="v">Номер вершины</param>
-            public Iterator(ref SimpleStaticGraph<VertexDataType, EdgeDataType> _simpleGraph, int v)
+            public Iterator(SimpleStaticGraph<TVertexDataType, TEdgeDataType> simpleGraph, int v)
             {
-                this.SimpleGraph = _simpleGraph;
+                _simpleGraph = simpleGraph;
 
-                if (SimpleGraph.Dense() == GraphFormat.MatrixGraph)
+                if (_simpleGraph.Dense() == GraphFormat.MatrixGraph)
                 {
-                    Iter = new MatrixGraph.Iterator(ref SimpleGraph.graph, v);
+                    _iter = new MatrixGraph.Iterator(_simpleGraph._graph, v);
                 }
                 else
                 {
-                    Iter = new ListGraph.Iterator(ref SimpleGraph.graph, v);
+                    _iter = new ListGraph.Iterator(_simpleGraph._graph, v);
                 }
             }
 
@@ -535,7 +510,7 @@ namespace Graphs
             /// <returns></returns>
             public void Begin()
             {
-                Iter.Begin();
+                _iter.Begin();
             }
 
             /// <summary>
@@ -543,7 +518,7 @@ namespace Graphs
             /// </summary>
             public void End()
             {
-                Iter.End();
+                _iter.End();
             }
 
             /// <summary>
@@ -552,7 +527,7 @@ namespace Graphs
             /// <returns></returns>
             public bool Next()
             {
-                return Iter.Next();
+                return _iter.Next();
             }
 
             /// <summary>
@@ -561,7 +536,7 @@ namespace Graphs
             /// <returns></returns>
             public int Current()
             {
-                return Iter.Current();
+                return _iter.Current();
             }
         }
         #endregion
@@ -569,14 +544,14 @@ namespace Graphs
         /// <summary>
         /// Базовый объект графа
         /// </summary>
-        private GeneralGraph graph;
+        private GeneralGraph _graph;
 
         /// <summary>
         /// Конструктор по-умолчанию
         /// </summary>
         public SimpleStaticGraph()
         {
-            graph = new ListGraph(0, 0, GraphType.NotOriented);
+            _graph = new ListGraph(0, 0, GraphType.NotOriented);
         }
 
         /// <summary>
@@ -598,11 +573,11 @@ namespace Graphs
         {
             if (format == GraphFormat.MatrixGraph)
             {
-                graph = new MatrixGraph(vertexCount, randomEdgesCount, direction);
+                _graph = new MatrixGraph(vertexCount, randomEdgesCount, direction);
             }
             else
             {
-                graph = new ListGraph(vertexCount, randomEdgesCount, direction);
+                _graph = new ListGraph(vertexCount, randomEdgesCount, direction);
             }
         }
 
@@ -614,7 +589,7 @@ namespace Graphs
         /// <returns></returns>
         public bool InsertEdge(int v1, int v2)
         {
-            return graph.InsertEdge(v1, v2);
+            return _graph.InsertEdge(v1, v2);
         }
 
         /// <summary>
@@ -625,7 +600,7 @@ namespace Graphs
         /// <returns></returns>
         public bool DeleteEdge(int v1, int v2)
         {
-            return graph.DeleteEdge(v1, v2);
+            return _graph.DeleteEdge(v1, v2);
         }
         
         /// <summary>
@@ -636,7 +611,7 @@ namespace Graphs
         /// <returns></returns>
         public bool IsEdge(int v1, int v2)
         {
-            return graph.IsEdge(v1, v2);
+            return _graph.IsEdge(v1, v2);
         }
 
         /// <summary>
@@ -645,9 +620,9 @@ namespace Graphs
         /// <param name="v1">Начальная вершина</param>
         /// <param name="v2">Конечная вершина</param>
         /// <returns></returns>
-        public EdgeDataType GetEdge(int v1, int v2)
+        public TEdgeDataType GetEdge(int v1, int v2)
         {
-            return graph.GetEdge(v1, v2);
+            return _graph.GetEdge(v1, v2);
         }
 
         /// <summary>
@@ -657,9 +632,9 @@ namespace Graphs
         /// <param name="v2">Конечная вершина</param>
         /// <param name="data">Данные вершины</param>
         /// <returns></returns>
-        public bool SetEdge(int v1, int v2, EdgeDataType data)
+        public bool SetEdge(int v1, int v2, TEdgeDataType data)
         {
-            return graph.SetEdge(v1, v2, data);
+            return _graph.SetEdge(v1, v2, data);
         }
 
         /// <summary>
@@ -667,9 +642,9 @@ namespace Graphs
         /// </summary>
         /// <param name="v">Номер вершины</param>
         /// <returns></returns>
-        public VertexDataType GetVertex(int v)
+        public TVertexDataType GetVertex(int v)
         {
-            return graph.GetVertex(v);
+            return _graph.GetVertex(v);
         }
 
         /// <summary>
@@ -678,9 +653,9 @@ namespace Graphs
         /// <param name="v">Номер вершины</param>
         /// <param name="data">Данные вершины</param>
         /// <returns></returns>
-        public bool SetVertex(int v, VertexDataType data)
+        public bool SetVertex(int v, TVertexDataType data)
         {
-            return graph.SetVertex(v, data);
+            return _graph.SetVertex(v, data);
         }
 
         /// <summary>
@@ -689,7 +664,7 @@ namespace Graphs
         /// <returns></returns>
         public int VertexCount()
         {
-            return graph.VertexCount;
+            return _graph.VertexCount;
         }
 
         /// <summary>
@@ -698,7 +673,7 @@ namespace Graphs
         /// <returns></returns>
         public int EdgeCount()
         {
-            return graph.EdgeCount;
+            return _graph.EdgeCount;
         }
 
         /// <summary>
@@ -707,10 +682,7 @@ namespace Graphs
         /// <returns></returns>
         public GraphFormat Dense()
         {
-            if (graph is MatrixGraph)
-                return GraphFormat.MatrixGraph;
-            else
-                return GraphFormat.ListGraph;
+            return _graph is MatrixGraph ? GraphFormat.MatrixGraph : GraphFormat.ListGraph;
         }
 
         /// <summary>
@@ -719,7 +691,53 @@ namespace Graphs
         /// <returns></returns>
         public GraphType Direction()
         {
-            return graph.Direction;
+            return _graph.Direction;
+        }
+
+        /// <summary>
+        /// Конвертация типов графа
+        /// </summary>
+        /// <returns></returns>
+        public void Convert()
+        {
+            if (Dense() == GraphFormat.MatrixGraph)
+            {
+                var g = new ListGraph(_graph.VertexCount, 0, _graph.Direction);
+
+                for (int i = 0; i != _graph.VertexCount; i++)
+                {
+                    var iter = new MatrixGraph.Iterator(_graph, i);
+                    iter.Begin();
+
+                    while (iter.Current() != -1)
+                    {
+                        g.InsertEdge(i, iter.Current());
+                        g.SetEdge(i, iter.Current(), _graph.GetEdge(i, iter.Current()));
+                        iter.Next();
+                    }
+                }
+
+                _graph = g;
+            }
+            else
+            {
+                var g = new MatrixGraph(_graph.VertexCount, 0, _graph.Direction);
+
+                for (int i = 0; i != _graph.VertexCount; i++)
+                {
+                    var iter = new ListGraph.Iterator(_graph, i);
+                    iter.Begin();
+
+                    while (iter.Current() != -1)
+                    {
+                        g.InsertEdge(i, iter.Current());
+                        g.SetEdge(i, iter.Current(), _graph.GetEdge(i, iter.Current()));
+                        iter.Next();
+                    }
+                }
+
+                _graph = g;
+            }
         }
 
         /// <summary>
@@ -728,11 +746,11 @@ namespace Graphs
         /// <returns></returns>
         public object Clone()
         {
-            object result = null;
+            object result;
 
-            using (MemoryStream ms = new MemoryStream())
+            using (var ms = new MemoryStream())
             {
-                BinaryFormatter bf = new BinaryFormatter();
+                var bf = new BinaryFormatter();
                 bf.Serialize(ms, this);
                 ms.Position = 0;
                 result = bf.Deserialize(ms);

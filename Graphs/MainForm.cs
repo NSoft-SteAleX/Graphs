@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
@@ -13,11 +10,20 @@ namespace Graphs
 {
     public partial class MainForm : Form
     {
-        private int edgeSize = 40;
-        private int lineWidth = 2;
-        private int vertexOne = -1, vertexTwo = -1;
-        private Graphics gdi;
-        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> graph = new SimpleStaticGraph<VertexDescriptor,EdgeDescriptor>();
+        /// <summary>
+        /// Объект графа
+        /// </summary>
+        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph = new SimpleStaticGraph<VertexDescriptor,EdgeDescriptor>();
+        
+        /// <summary>
+        /// Начальная и конечная точки (выбранные)
+        /// </summary>
+        private int _vertexOne = -1, _vertexTwo = -1;
+
+        /// <summary>
+        /// Графический объект для 2D
+        /// </summary>
+        private Graphics _gdi;
 
         /// <summary>
         /// Конструктор формы
@@ -38,9 +44,9 @@ namespace Graphs
             typeSelectBox.SelectedItem = typeSelectBox.Items[0];
             orientSelectBox.SelectedItem = orientSelectBox.Items[0];
 
-            gdi = renderFrame.CreateGraphics();
-            gdi.SmoothingMode = SmoothingMode.HighQuality;
-            gdi.CompositingQuality = CompositingQuality.HighQuality;
+            _gdi = renderFrame.CreateGraphics();
+            _gdi.SmoothingMode = SmoothingMode.HighQuality;
+            _gdi.CompositingQuality = CompositingQuality.HighQuality;
             PrintGraph();
         }
 
@@ -53,43 +59,18 @@ namespace Graphs
         {
             if (vertexCountText.Text.Length > 0)
             {
-                GraphFormat format;
-                GraphType type;
-                string _format, _type;
-
-                if (typeSelectBox.SelectedIndex == 0)
-                {
-                    format = GraphFormat.MatrixGraph;
-                    _format = "Матрица смежностей";
-                }
-                else
-                {
-                    format = GraphFormat.ListGraph;
-                    _format = "Список смежностей";
-                }
-
-                if (orientSelectBox.SelectedIndex == 0)
-                {
-                    type = GraphType.NotOriented;
-                    _type = "Неориентированный";
-                }
-                else
-                {
-                    type = GraphType.Oriented;
-                    _type = "Ориентированный";
-                }
+                GraphFormat format = typeSelectBox.SelectedIndex == 0 ? GraphFormat.MatrixGraph : GraphFormat.ListGraph;
+                GraphType type = orientSelectBox.SelectedIndex == 0 ? GraphType.NotOriented : GraphType.Oriented;
 
                 //Создаём объект графа
-                graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(Convert.ToInt32(vertexCountText.Text), type, format);
-
-                //Установка лейбла с инфо
-                graphInfoLabel.Text = "Вершин: " + vertexCountText.Text + ", " + _format + ", " + _type;
-
+                _graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(Convert.ToInt32(vertexCountText.Text), 
+                    type, format);
+                
                 PrintGraph();
             }
             else
             {
-                MessageBox.Show("Введите число вершин.");
+                ShowWarning("Введите число вершин.");
             }
         }
 
@@ -100,10 +81,10 @@ namespace Graphs
         /// <param name="e"></param>
         private void addEdgeButton_Click(object sender, EventArgs e)
         {
-            if (vertexOne != -1 && vertexTwo != -1)
+            if (_vertexOne != -1 && _vertexTwo != -1)
             {
-                graph.InsertEdge(vertexOne, vertexTwo);
-                vertexOne = vertexTwo = -1;
+                _graph.InsertEdge(_vertexOne, _vertexTwo);
+                _vertexOne = _vertexTwo = -1;
             }
 
             PrintGraph();
@@ -116,13 +97,61 @@ namespace Graphs
         /// <param name="e"></param>
         private void deleteEdgeButton_Click(object sender, EventArgs e)
         {
-            if (vertexOne != -1 && vertexTwo != -1)
+            if (_vertexOne != -1 && _vertexTwo != -1)
             {
-                graph.DeleteEdge(vertexOne, vertexTwo);
-                vertexOne = vertexTwo = -1;
+                _graph.DeleteEdge(_vertexOne, _vertexTwo);
+                _vertexOne = _vertexTwo = -1;
             }
 
             PrintGraph();
+        }
+
+        /// <summary>
+        /// Проверка существования ребра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void isEdgeButton_Click(object sender, EventArgs e)
+        {
+            if (_vertexOne == -1 || _vertexTwo == -1)
+            {
+                ShowWarning("Выберите начальную и конечную вершины");
+                return;
+            }
+
+            if (_graph.IsEdge(_vertexOne, _vertexTwo))
+            {
+                MessageBox.Show("Ребро между вершинами " + _vertexOne + " и " + _vertexTwo + " существует");
+            }
+            else
+            {
+                MessageBox.Show("Ребра между вершинами " + _vertexOne + " и " + _vertexTwo + " не существует");
+            }
+        }
+
+        /// <summary>
+        /// Установка данных ребра
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void edgeWeightSetButton_Click(object sender, EventArgs e)
+        {
+            if(_vertexOne != -1 && _vertexTwo != -1 && _graph.IsEdge(_vertexOne, _vertexTwo))
+            {
+                var form = new EdgeDataSetForm();
+                form.ShowDialog();
+
+                if(form.NeedToSave)
+                {
+                    _graph.SetEdge(_vertexOne, _vertexTwo, form.Descriptor);
+                }
+
+                PrintGraph();
+            }
+            else
+            {
+                ShowWarning("Выберите ребро.");
+            }
         }
 
         /// <summary>
@@ -130,51 +159,54 @@ namespace Graphs
         /// </summary>
         private void PrintGraph()
         {
-            double divconst = graph.VertexCount() / 2d;
-            gdi.Clear(Color.Gray);
+            double divconst = _graph.VertexCount() / 2d;
+            var points = new List<Rectangle>();
+
+            _gdi.Clear(Color.Gray);
             renderFrame.Controls.Clear();
-            int currx = 0, curry = 0;
 
             //Отрисовка вершин
-            for (int i = 0; i != graph.VertexCount(); i++)
+            for (int i = 0; i != _graph.VertexCount(); i++)
             {
-                Label l = new Label();
+                var l = new Label {
+                    Text = i.ToString(),
+                    Size = new Size(40, 40),
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
 
-                l.Text = i.ToString();
-                l.Size = new Size(edgeSize, edgeSize);
-                l.TextAlign = ContentAlignment.MiddleCenter;
-                l.MouseClick += new MouseEventHandler(l_MouseClick);
+                l.MouseClick += vertex_Click;
 
-                Panel p = new Panel();
-
+                var p = new Panel();
                 p.Controls.Add(l);
                 p.Name = i.ToString();
 
-                if (i == vertexOne || i == vertexTwo)
+                if (i == _vertexOne || i == _vertexTwo)
                 {
                     p.BackgroundImage = GetImageFromPath("layout\\SelectedEdge.png");
                 }
                 else
                 {
-                    p.BackgroundImage = GetImageFromPath("layout\\NormalEdge.png");
+                   p.BackgroundImage = GetImageFromPath("layout\\NormalEdge.png");
                 }
 
                 p.BackgroundImageLayout = ImageLayout.Zoom;
                 p.BackColor = Color.Transparent;
-                p.MouseClick += new MouseEventHandler(p_MouseClick);
-                p.Size = new Size(edgeSize, edgeSize);
-                currx = (int)(275 + Math.Cos((Math.PI / divconst) * i) * 170);
-                curry = (int)(180 - Math.Sin((Math.PI / divconst) * i) * 155);
+                p.MouseClick += vertex_Click;
+                p.Size = new Size(40, 40);
+                var currx = (int)(275 + Math.Cos((Math.PI / divconst) * i) * 170);
+                var curry = (int)(180 - Math.Sin((Math.PI / divconst) * i) * 155);
                 p.Location = new Point(currx, curry);
 
                 renderFrame.Controls.Add(p);
             }
 
             //Отрисовка рёбер
-            Pen pen = new Pen(Brushes.White, 1);
-            for (int i = 0; i != graph.VertexCount(); i++)
+            var pen = new Pen(Brushes.White, 1);
+            Brush brush = Brushes.AliceBlue;
+
+            for (int i = 0; i != _graph.VertexCount(); i++)
             {
-                var iter = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Iterator(ref graph, i);
+                var iter = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Iterator(_graph, i);
                 iter.Begin();
 
                 while (iter.Current() != -1)
@@ -183,40 +215,64 @@ namespace Graphs
                     Control c2 = renderFrame.Controls[iter.Current()];
                     Point p1 = c1.Location + new Size(c1.Size.Width / 2, c1.Size.Height / 2);
                     Point p2 = c2.Location + new Size(c2.Size.Width / 2, c2.Size.Height / 2);
-                    gdi.DrawLine(pen, p1, p2);
+
+                    //Solution made by Nik
+                    //Don't ask why it's 0.2 coeff. T___T
+                    points.Add(new Rectangle(p2 - new Size((int)(0.2 * (p2.X - p1.X)) + 5, 
+                        (int)(0.2 * (p2.Y - p1.Y)) + 5), new Size(10, 10)));
+                    _gdi.DrawLine(pen, p1, p2);
 
                     iter.Next();
                 }
             }
+
+            //Рисуем точки для указания направления ребра
+            //Solution made by Nik
+            if (_graph.Direction() == GraphType.Oriented)
+            {
+                foreach (Rectangle r in points)
+                {
+                    _gdi.FillEllipse(brush, r);
+                }
+            }
+
+            UpdateGraphLabel();
         }
 
-        #region Обработка нажатий на вершины
-        private void l_MouseClick(object sender, MouseEventArgs e)
+        /// <summary>
+        /// Обработка нажатиия на вершину
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void vertex_Click(object sender, MouseEventArgs e)
         {
-            int clickedindex = Convert.ToInt32((sender as Label).Text); // edge id, where mouse has been clicked
-            if (vertexOne == -1) { vertexOne = clickedindex; PrintGraph(); return; }
-            if (vertexTwo == -1) { vertexTwo = clickedindex; PrintGraph(); return; }
-            vertexOne = vertexTwo = -1;
+            int index = Convert.ToInt32(((Label)sender).Text);
+
+            if (_vertexOne == -1) 
+            { 
+                _vertexOne = index; 
+                PrintGraph(); 
+                return; 
+            }
+            if (_vertexTwo == -1) 
+            { 
+                _vertexTwo = index; 
+                PrintGraph(); 
+                return; 
+            }
+
+            _vertexOne = _vertexTwo = -1;
             PrintGraph();
         }
-        private void p_MouseClick(object sender, MouseEventArgs e)
-        {
-            int clickedindex = Convert.ToInt32((sender as Panel).Name); // edge id, where mouse has been clicked
-            if (vertexOne == -1) { vertexOne = clickedindex; PrintGraph(); return; }
-            if (vertexTwo == -1) { vertexTwo = clickedindex; PrintGraph(); return; }
-            vertexOne = vertexTwo = -1;
-            PrintGraph();
-        }
-        #endregion
 
         /// <summary>
         /// Получение изображения по заданному пути
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private Image GetImageFromPath(string path)
+        private static Image GetImageFromPath(string path)
         {
-            FileStream fs = new FileStream(path, FileMode.Open);
+            var fs = new FileStream(path, FileMode.Open);
             Image img = Image.FromStream(fs);
             fs.Close();
             return img;
@@ -235,9 +291,163 @@ namespace Graphs
             }
             catch
             {
-                MessageBox.Show("Введите числовое значение!");
+                ShowWarning("Введите числовое значение!");
                 vertexCountText.Text = "0";
             }
+        }
+
+        /// <summary>
+        /// Конвертация типа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void convertButton_Click(object sender, EventArgs e)
+        {
+            _graph.Convert();
+            PrintGraph();
+        }
+
+        /// <summary>
+        /// Обноление инфо-лейбла
+        /// </summary>
+        private void UpdateGraphLabel()
+        {
+            string _format = _graph.Dense() == GraphFormat.MatrixGraph ? "Матрица смежностей" : "Список смежностей";
+            string _type = _graph.Direction() == GraphType.NotOriented ? "Неориентированный" : "Ориентированный";
+
+            //Установка лейбла с инфо о графе
+            graphInfoLabel.Text = "Вершин: " + _graph.VertexCount() + ", Рёбер: "+_graph.EdgeCount()+
+                ", " + _format + ", " + _type;
+
+            //Установка лейбла с инфо о ребре
+            if(_vertexOne != -1 && _vertexTwo != -1 && _graph.IsEdge(_vertexOne, _vertexTwo))
+            {
+                edgeInfoLabel.Text = "Вес ребра: " + _graph.GetEdge(_vertexOne, _vertexTwo).Weight;
+            }
+            else
+            {
+                edgeInfoLabel.Text = "Выберите ребро";
+            }
+        }
+
+        #region Обработка эвентов меню
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        private void genRandomEdgesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (_graph.VertexCount() > 0)
+            {
+                var form = new RandomEdgesForm();
+                form.ShowDialog();
+
+                if (form.RandomEdgesCount > 0 && form.NeedToSave)
+                {
+                    _graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(_graph.VertexCount(), form.RandomEdgesCount,
+                        _graph.Direction(), _graph.Dense());
+                }
+
+                PrintGraph();
+            }
+            else
+            {
+                MessageBox.Show("Создайте граф с ненулевым числом вершин.");
+            }
+        }
+        private void taskOneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            taskOneButton_Click(sender, e);
+        }
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dlg = new OpenFileDialog
+            {
+                Filter = "Graph files (*.graph)|*.graph|All files (*.*)|*.*"
+            };
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string file = dlg.FileName;
+                    var binFormat = new BinaryFormatter();
+
+                    using (Stream fStream = File.OpenRead(file))
+                    {
+                        _graph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>) binFormat.Deserialize(fStream);
+                    }
+
+                    PrintGraph();
+                }
+                catch
+                {
+                    ShowWarning("Некорректный файл графа.");
+                }
+            }
+        }
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dlg = new SaveFileDialog()
+            {
+                Filter = "Graph files (*.graph)|*.graph|All files (*.*)|*.*"
+            };
+
+            if(dlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string file = dlg.FileName;
+                    var binFormat = new BinaryFormatter();
+
+                    using (Stream fStream = new FileStream(file, 
+                        FileMode.Create, FileAccess.Write, FileShare.None))
+                    {
+                        binFormat.Serialize(fStream, _graph);
+                    }
+
+                    PrintGraph();
+                }
+                catch (Exception)
+                {
+                    ShowWarning("Некорректный файл графа.");
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        /// <summary>
+        /// Решение "Задачи 1"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void taskOneButton_Click(object sender, EventArgs e)
+        {
+            var taskOne = new TaskOne<VertexDescriptor, EdgeDescriptor>(_graph);
+            taskOne.Result();
+        }
+
+        /// <summary>
+        /// Отображение предупреждения
+        /// </summary>
+        /// <param name="txt"></param>
+        public static void ShowWarning(string txt)
+        {
+            MessageBox.Show(txt, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
     }
 }

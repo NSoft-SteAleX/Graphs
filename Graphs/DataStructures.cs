@@ -1,20 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Graphs
 {
     /// <summary>
     /// Дескриптор вершины
     /// </summary>
-    struct VertexDescriptor
+    [Serializable]
+    public struct VertexDescriptor
     {
-        /*
-        public enum Colors { Black, White, None }
-        public Colors color;
-        */
-        public string name;
+        /// <summary>
+        /// Имя вершины
+        /// </summary>
+        public string Name;
 
         /// <summary>
         /// Конструктор
@@ -22,16 +19,17 @@ namespace Graphs
         /// <param name="n">Имя вершины</param>
         public VertexDescriptor(string n)
         {
-            name = n;
+            Name = n;
         }
     }
     
     /// <summary>
     /// Дескриптор ребра
     /// </summary>
-    struct EdgeDescriptor
+    [Serializable]
+    public struct EdgeDescriptor
     {
-        public double weight;
+        public double Weight;
 
         /// <summary>
         /// Конструктор структуры
@@ -39,7 +37,7 @@ namespace Graphs
         /// <param name="w">Вес ребра</param>
         public EdgeDescriptor(double w)
         {
-            weight = w;
+            Weight = w;
         }
     }
 }
