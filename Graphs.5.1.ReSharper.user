@@ -3,61 +3,245 @@
     <string />
     <integer />
     <boolean>
-      <setting name="SolutionAnalysisEnabled">False</setting>
+      <setting name="livetemplates.csharp.usevar">True</setting>
+      <setting name="SolutionAnalysisEnabled">True</setting>
     </boolean>
   </SettingsComponent>
   <CompletionStatisticsManager>
     <ItemStatistics item="Default">
-      <Item value="i" priority="0" />
-      <Item value="MessageBox`0" priority="0" />
-      <Item value="return" priority="0" />
-      <Item value="_graph" priority="0" />
+      <Item value="i" priority="6" />
+      <Item value="MessageBox`0" priority="1" />
+      <Item value="return" priority="4" />
+      <Item value="_graph" priority="15" />
+      <Item value="abstract" priority="1" />
+      <Item value="protected" priority="4" />
+      <Item value="readonly" priority="0" />
+      <Item value="SimpleStaticGraph" priority="8" />
+      <Item value="VertexDescriptor`0" priority="9" />
+      <Item value="EdgeDescriptor`0" priority="9" />
+      <Item value="int" priority="26" />
+      <Item value="List" priority="1" />
+      <Item value="void" priority="6" />
+      <Item value="for" priority="5" />
+      <Item value="v" priority="3" />
+      <Item value="graph" priority="8" />
+      <Item value="if" priority="18" />
+      <Item value="ord" priority="12" />
+      <Item value="searchC`0" priority="1" />
+      <Item value="ctor" priority="3" />
+      <Item value="ref" priority="1" />
+      <Item value="g" priority="12" />
+      <Item value="new" priority="15" />
+      <Item value="List&lt;int&gt;" priority="1" />
+      <Item value="count" priority="4" />
+      <Item value="Search" priority="0" />
+      <Item value="TVertexDataType`0" priority="6" />
+      <Item value="TEdgeDataType`0" priority="5" />
+      <Item value="private" priority="6" />
+      <Item value="override" priority="0" />
+      <Item value="w" priority="3" />
+      <Item value="cnt" priority="0" />
+      <Item value="_low" priority="10" />
+      <Item value="var" priority="4" />
+      <Item value="A" priority="6" />
+      <Item value="t" priority="6" />
+      <Item value="_bcnt" priority="2" />
+      <Item value="else" priority="7" />
+      <Item value="public" priority="7" />
+      <Item value="const" priority="0" />
+      <Item value="base" priority="0" />
+      <Item value="search`0" priority="0" />
+      <Item value="EC" priority="0" />
+      <Item value="test" priority="1" />
+      <Item value="bool" priority="4" />
+      <Item value="used" priority="3" />
+      <Item value="true" priority="2" />
+      <Item value="tin" priority="6" />
+      <Item value="up" priority="8" />
+      <Item value="prev" priority="1" />
+      <Item value="continue" priority="0" />
+      <Item value="u" priority="1" />
+      <Item value="a" priority="2" />
+      <Item value="b" priority="0" />
+      <Item value="min`0" priority="1" />
+      <Item value="dfs`0" priority="2" />
+      <Item value="answer" priority="6" />
+      <Item value="vcnt" priority="3" />
+      <Item value="false" priority="1" />
+      <Item value="DFSSearch`0" priority="0" />
+      <Item value="foreach" priority="0" />
+      <Item value="string" priority="1" />
+      <Item value="vertexCount" priority="1" />
+      <Item value="Count" priority="0" />
+      <Item value="Math`0" priority="0" />
+      <Item value="ITask" priority="0" />
+      <Item value="SeparationVertices" priority="0" />
+      <Item value="_worker" priority="1" />
+      <Item value="SeparationVertices&lt;TVertexDataType,TEdgeDataType&gt;" priority="1" />
+      <Item value="TaskOne" priority="1" />
+      <Item value="taskOne" priority="0" />
+      <Item value="NotOriented" priority="0" />
+      <Item value="taskOneButton_Click`0" priority="0" />
+      <Item value="sender" priority="0" />
+      <Item value="BinaryFormatter" priority="0" />
+      <Item value="using" priority="1" />
+      <Item value="binFormat" priority="1" />
+      <Item value="fStream" priority="1" />
+      <Item value="SaveFileDialog`0" priority="0" />
+      <Item value="dlg" priority="1" />
+      <Item value="OK" priority="0" />
+      <Item value="try" priority="0" />
+      <Item value="BinaryFormatter`0" priority="0" />
+      <Item value="PrintGraph`0" priority="1" />
+      <Item value="ShowWarning`0" priority="1" />
+      <Item value="_vertexOne" priority="3" />
+      <Item value="_vertexTwo" priority="7" />
+      <Item value="edgeInfo" priority="0" />
+      <Item value="double" priority="0" />
+      <Item value="get" priority="0" />
+      <Item value="set" priority="0" />
+      <Item value="NeedToSave" priority="0" />
+      <Item value="edgeWeightText" priority="2" />
+      <Item value="MainForm`0" priority="2" />
+      <Item value="EdgeWeight" priority="0" />
+      <Item value="Descriptor" priority="3" />
+      <Item value="EdgeDescriptor" priority="1" />
+      <Item value="Convert`0" priority="0" />
+      <Item value="EdgeDataSetForm`0" priority="0" />
+      <Item value="form" priority="1" />
+      <Item value="randomEdgesText" priority="0" />
+      <Item value="edgeInfoLabel" priority="0" />
+      <Item value="ContentAlignment`0" priority="0" />
+      <Item value="iter" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows.Forms.MessageBox">
-      <Item value="Show`0" priority="0" />
+      <Item value="Show`0" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:Graphs.SimpleStaticGraph`2">
       <Item value="EdgeCount`0" priority="0" />
+      <Item value="VertexCount`0" priority="10" />
+      <Item value="Clone`0" priority="0" />
+      <Item value="Direction`0" priority="0" />
+      <Item value="IsEdge`0" priority="1" />
+      <Item value="GetEdge`0" priority="0" />
+      <Item value="SetEdge`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
+      <Item value="ForEach`0" priority="1" />
+      <Item value="AddRange`0" priority="0" />
+      <Item value="Add`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Graphs.SimpleStaticGraph`2">
+      <Item value="Iterator`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.SimpleStaticGraph`2+Iterator">
+      <Item value="Begin`0" priority="2" />
+      <Item value="Current`0" priority="1" />
+      <Item value="Next`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.EC`2">
+      <Item value="Count`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Int32">
+      <Item value="ToString`0" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.DFSSearch">
+      <Item value="vcnt" priority="0" />
+      <Item value="answer" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Math">
+      <Item value="Min`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.TaskOne`2">
+      <Item value="Result`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter">
+      <Item value="Deserialize`0" priority="0" />
+      <Item value="Serialize`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.SaveFileDialog">
+      <Item value="ShowDialog`0" priority="0" />
+      <Item value="FileName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Label">
+      <Item value="Text" priority="0" />
+      <Item value="TextAlign" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.EdgeDescriptor">
+      <Item value="Weight" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Convert">
+      <Item value="ToDouble`0" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.TextBox">
+      <Item value="Text" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Graphs.MainForm">
+      <Item value="ShowWarning`0" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.EdgeDataSetForm">
+      <Item value="ShowDialog`0" priority="0" />
+      <Item value="NeedToSave" priority="0" />
+      <Item value="Descriptor" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.String">
+      <Item value="Length" priority="1" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Drawing.ContentAlignment">
+      <Item value="MiddleRight" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.SimpleStaticGraph`2+ListGraph">
+      <Item value="SetEdge`0" priority="0" />
+      <Item value="GetEdge`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graphs.SimpleStaticGraph`2+MatrixGraph+Iterator">
+      <Item value="Current`0" priority="1" />
     </ItemStatistics>
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:DataStructures.cs" caret="808" fromTop="12" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="997" fromTop="15" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="11285" fromTop="114" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="18133" fromTop="0" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.Designer.cs" caret="61" fromTop="3" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Properties/f:AssemblyInfo.cs" caret="841" fromTop="18" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="1118" fromTop="15" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:ITask.cs" caret="442" fromTop="14" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="18290" fromTop="11" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="42" fromTop="3" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="58" fromTop="3" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="252" fromTop="9" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="41" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:SeparationVertices.cs" caret="0" fromTop="0" />
     </RecentFiles>
     <RecentEdits>
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="15075" fromTop="27" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="15624" fromTop="31" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="15871" fromTop="29" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="15923" fromTop="27" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:SimpleStaticGraph.cs" caret="4512" fromTop="35" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:DataStructures.cs" caret="219" fromTop="15" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:DataStructures.cs" caret="574" fromTop="17" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:DataStructures.cs" caret="0" fromTop="0" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="584" fromTop="23" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="368" fromTop="18" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="713" fromTop="25" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="2247" fromTop="28" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="1707" fromTop="19" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3589" fromTop="8" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="4661" fromTop="35" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3849" fromTop="13" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3852" fromTop="14" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="4110" fromTop="21" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="5054" fromTop="16" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="7491" fromTop="27" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="8922" fromTop="26" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="9544" fromTop="22" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="71" fromTop="2" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="6714" fromTop="20" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="143" fromTop="13" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="416" fromTop="25" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="624" fromTop="25" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="345" fromTop="16" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="13" fromTop="0" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="9823" fromTop="27" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3497" fromTop="18" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="5020" fromTop="39" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="4349" fromTop="26" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="4913" fromTop="33" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="18" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="29" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="20" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="19" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="1094" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:RandomEdgesForm.cs" caret="1095" fromTop="32" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="0" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="10860" fromTop="31" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="25027" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="23722" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="24373" fromTop="41" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="23092" fromTop="5" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="15161" fromTop="33" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="3093" fromTop="27" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="3093" fromTop="36" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="3093" fromTop="31" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="15" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="25027" fromTop="5" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="654" fromTop="28" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="6763" fromTop="20" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="3093" fromTop="17" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="30" fromTop="2" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="3093" fromTop="90" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1045" fromTop="41" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="1150" fromTop="41" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>

@@ -1,4 +1,4 @@
-﻿namespace Graphs
+﻿namespace GraphsRender
 {
     partial class RandomEdgesForm
     {

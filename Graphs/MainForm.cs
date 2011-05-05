@@ -5,8 +5,11 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
+using GraphsRender.Graph;
+using GraphsRender.TaskOne;
+using GraphsRender.TaskTwo;
 
-namespace Graphs
+namespace GraphsRender
 {
     public partial class MainForm : Form
     {
@@ -14,16 +17,22 @@ namespace Graphs
         /// Объект графа
         /// </summary>
         private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph = new SimpleStaticGraph<VertexDescriptor,EdgeDescriptor>();
-        
+
         /// <summary>
-        /// Начальная и конечная точки (выбранные)
+        /// Объект графа для бэкапов во время
+        /// выполнения задач
         /// </summary>
-        private int _vertexOne = -1, _vertexTwo = -1;
+        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _backupGraph;
 
         /// <summary>
         /// Графический объект для 2D
         /// </summary>
         private Graphics _gdi;
+
+        /// <summary>
+        /// Начальная и конечная точки (выбранные)
+        /// </summary>
+        private int _vertexOne = -1, _vertexTwo = -1;
 
         /// <summary>
         /// Конструктор формы
@@ -59,8 +68,8 @@ namespace Graphs
         {
             if (vertexCountText.Text.Length > 0)
             {
-                GraphFormat format = typeSelectBox.SelectedIndex == 0 ? GraphFormat.MatrixGraph : GraphFormat.ListGraph;
-                GraphType type = orientSelectBox.SelectedIndex == 0 ? GraphType.NotOriented : GraphType.Oriented;
+                var format = typeSelectBox.SelectedIndex == 0 ? GraphFormat.MatrixGraph : GraphFormat.ListGraph;
+                var type = orientSelectBox.SelectedIndex == 0 ? GraphType.NotOriented : GraphType.Oriented;
 
                 //Создаём объект графа
                 _graph = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>(Convert.ToInt32(vertexCountText.Text), 
@@ -202,7 +211,7 @@ namespace Graphs
 
             //Отрисовка рёбер
             var pen = new Pen(Brushes.White, 1);
-            Brush brush = Brushes.AliceBlue;
+            var brush = Brushes.AliceBlue;
 
             for (int i = 0; i != _graph.VertexCount(); i++)
             {
@@ -211,6 +220,15 @@ namespace Graphs
 
                 while (iter.Current() != -1)
                 {
+                    if(iter.GetCurrentEdge().Data.Color == Colors.Blue)
+                    {
+                        pen.Color = Color.Blue;
+                    }
+                    else
+                    {
+                        pen.Color = Color.White;
+                    }
+
                     Control c1 = renderFrame.Controls[i];
                     Control c2 = renderFrame.Controls[iter.Current()];
                     Point p1 = c1.Location + new Size(c1.Size.Width / 2, c1.Size.Height / 2);
@@ -273,8 +291,9 @@ namespace Graphs
         private static Image GetImageFromPath(string path)
         {
             var fs = new FileStream(path, FileMode.Open);
-            Image img = Image.FromStream(fs);
+            var img = Image.FromStream(fs);
             fs.Close();
+
             return img;
         }
 
@@ -316,13 +335,13 @@ namespace Graphs
             string _type = _graph.Direction() == GraphType.NotOriented ? "Неориентированный" : "Ориентированный";
 
             //Установка лейбла с инфо о графе
-            graphInfoLabel.Text = "Вершин: " + _graph.VertexCount() + ", Рёбер: "+_graph.EdgeCount()+
-                ", " + _format + ", " + _type;
+            graphInfoLabel.Text = "K: " + Math.Round(_graph.GetCoefficient(), 2) + ", Вершин: " + _graph.VertexCount() + 
+                ", Рёбер: "+_graph.EdgeCount()+", " + _format + ", " + _type;
 
             //Установка лейбла с инфо о ребре
             if(_vertexOne != -1 && _vertexTwo != -1 && _graph.IsEdge(_vertexOne, _vertexTwo))
             {
-                edgeInfoLabel.Text = "Вес ребра: " + _graph.GetEdge(_vertexOne, _vertexTwo).Weight;
+                edgeInfoLabel.Text = "Вес ребра: " + _graph.GetEdgeData(_vertexOne, _vertexTwo).Weight;
             }
             else
             {
@@ -400,8 +419,8 @@ namespace Graphs
                     string file = dlg.FileName;
                     var binFormat = new BinaryFormatter();
 
-                    using (Stream fStream = new FileStream(file, 
-                        FileMode.Create, FileAccess.Write, FileShare.None))
+                    using (Stream fStream = new FileStream(file, FileMode.Create, 
+                        FileAccess.Write, FileShare.None))
                     {
                         binFormat.Serialize(fStream, _graph);
                     }
@@ -430,6 +449,7 @@ namespace Graphs
             }
         }
 
+        #region Обработка задач
         /// <summary>
         /// Решение "Задачи 1"
         /// </summary>
@@ -440,6 +460,43 @@ namespace Graphs
             var taskOne = new TaskOne<VertexDescriptor, EdgeDescriptor>(_graph);
             taskOne.Result();
         }
+
+        /// <summary>
+        /// Решение "Задачи 2"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void taskTwoButton_Click(object sender, EventArgs e)
+        {
+            var newGraph = new TaskTwo.TaskTwo(_graph);
+            _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>)_graph.Clone();
+            _graph = newGraph.Result();
+            resetButton.Visible = true;
+            taskTwoButton.Visible = false;
+            edgeOperationsBox.Enabled = false;
+            taskOneButton.Enabled = false;
+            convertButton.Enabled = false;
+            generateBox.Enabled = false;
+            PrintGraph();
+        }
+
+        /// <summary>
+        /// Ресет для второй задачи
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            _graph = _backupGraph;
+            resetButton.Visible = false;
+            taskTwoButton.Visible = true;
+            edgeOperationsBox.Enabled = true;
+            taskOneButton.Enabled = true;
+            convertButton.Enabled = true;
+            generateBox.Enabled = true;
+            PrintGraph();
+        }
+        #endregion
 
         /// <summary>
         /// Отображение предупреждения

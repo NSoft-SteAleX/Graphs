@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using GraphsRender.Graph;
 
-namespace Graphs
+namespace GraphsRender
 {
     public partial class EdgeDataSetForm : Form
     {
