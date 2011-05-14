@@ -129,6 +129,11 @@ namespace GraphsRender.Graph
                 double maxEdges = VertexCount*(VertexCount - 1);
                 double k = EdgeCount/maxEdges;
 
+                if (maxEdges == 0)
+                {
+                    return 0;
+                }
+
                 if (Direction == GraphType.NotOriented)
                 {
                     k *= 2;

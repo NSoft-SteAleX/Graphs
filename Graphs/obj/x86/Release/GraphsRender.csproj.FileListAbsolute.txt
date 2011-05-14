@@ -1,0 +1,13 @@
+C:\Users\AlexandrFox\Graphs\Graphs\bin\Release\GraphsRender.exe
+C:\Users\AlexandrFox\Graphs\Graphs\bin\Release\GraphsRender.pdb
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\ResolveAssemblyReference.cache
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.AboutBox.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.EdgeDataSetForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.MainForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.Properties.Resources.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.RandomEdgesForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.TaskTwo.TaskTwoForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\ResGen.read.1.tlog
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\ResGen.write.1.tlog
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.exe
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Release\GraphsRender.pdb

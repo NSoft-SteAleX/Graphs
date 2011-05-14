@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Windows.Forms;
-using GraphsRender.Graph;
 
-namespace GraphsRender
+namespace GraphsRender.TaskTwo
 {
-    public partial class EdgeDataSetForm : Form
+    public partial class TaskTwoForm : Form
     {
-        public EdgeDescriptor Descriptor { get; set; }
+        public double EdgeWeight { get; private set; }
         public bool NeedToSave { get; set; }
 
-        public EdgeDataSetForm()
+        public TaskTwoForm()
         {
             InitializeComponent();
             NeedToSave = false;
         }
+
         private void edgeWeightText_TextChanged(object sender, EventArgs e)
         {
             if (edgeWeightText.Text.Length > 0)
@@ -32,11 +32,12 @@ namespace GraphsRender
                 }
             }
         }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
             if (edgeWeightText.Text.Length <= 0) return;
 
-            Descriptor = new EdgeDescriptor(Convert.ToDouble(edgeWeightText.Text));
+            EdgeWeight = Convert.ToDouble(edgeWeightText.Text);
             NeedToSave = true;
             Close();
         }

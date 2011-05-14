@@ -9,28 +9,33 @@ namespace GraphsRender.TaskTwo
     /// </summary>
     public class CruskallAlgorithm
     {
-        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph;
-        private List<SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Edge> _edgeList, _newEdgeList;
-        private UnionFind _unions;
+        private readonly double _minLength;
+        private readonly SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph;
+        private readonly List<SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Edge> _edgeList;
+        private readonly List<SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Edge> _newEdgeList;
+        private readonly UnionFind _unions;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="graph"></param>
-        public CruskallAlgorithm(SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> graph)
+        /// <param name="minLength"></param>
+        public CruskallAlgorithm(SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> graph, double minLength)
         {
+            _minLength = minLength;
             _graph = graph;
             _unions = new UnionFind(_graph.VertexCount());
             _newEdgeList = new List<SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Edge>(_graph.VertexCount());
             int v = _graph.VertexCount();
             int e = _graph.EdgeCount();
 
+            //Получение и сортировка списка рёбер
             _edgeList = _graph.GetEdges();
             _edgeList.Sort((a, b) => a.Data.Weight.CompareTo(b.Data.Weight));
 
             for (int i = 0, k = 1; i < e * 2 && k < v; i++)
             {
-                if(!_unions.Find(_edgeList[i].StartVertex, _edgeList[i].EndVertex))
+                if(!_unions.Find(_edgeList[i].StartVertex, _edgeList[i].EndVertex) && _edgeList[i].Data.Weight >= _minLength)
                 {
                     _unions.Unite(_edgeList[i].StartVertex, _edgeList[i].EndVertex);
                     _newEdgeList.Add(_edgeList[i]);

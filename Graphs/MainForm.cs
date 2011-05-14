@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Forms;
@@ -95,6 +96,10 @@ namespace GraphsRender
                 _graph.InsertEdge(_vertexOne, _vertexTwo);
                 _vertexOne = _vertexTwo = -1;
             }
+            else
+            {
+                ShowWarning("Выберите начальную и конечную вершину.");
+            }
 
             PrintGraph();
         }
@@ -110,6 +115,10 @@ namespace GraphsRender
             {
                 _graph.DeleteEdge(_vertexOne, _vertexTwo);
                 _vertexOne = _vertexTwo = -1;
+            }
+            else
+            {
+                ShowWarning("Выберите начальную и конечную вершину.");
             }
 
             PrintGraph();
@@ -155,6 +164,7 @@ namespace GraphsRender
                     _graph.SetEdge(_vertexOne, _vertexTwo, form.Descriptor);
                 }
 
+                _vertexOne = _vertexTwo = -1;
                 PrintGraph();
             }
             else
@@ -189,13 +199,17 @@ namespace GraphsRender
                 p.Controls.Add(l);
                 p.Name = i.ToString();
 
-                if (i == _vertexOne || i == _vertexTwo)
+                if(_graph.GetVertex(i).Color == Colors.Red)
                 {
-                    p.BackgroundImage = GetImageFromPath("layout\\SelectedEdge.png");
+                    p.BackgroundImage = GetImageFromPath("layout\\SeparationVertex.png");
+                }
+                else if (i == _vertexOne || i == _vertexTwo)
+                {
+                    p.BackgroundImage = GetImageFromPath("layout\\SelectedVertex.png");
                 }
                 else
                 {
-                   p.BackgroundImage = GetImageFromPath("layout\\NormalEdge.png");
+                    p.BackgroundImage = GetImageFromPath("layout\\NormalVertex.png");
                 }
 
                 p.BackgroundImageLayout = ImageLayout.Zoom;
@@ -220,6 +234,7 @@ namespace GraphsRender
 
                 while (iter.Current() != -1)
                 {
+                    //Установка цвета ребра
                     if(iter.GetCurrentEdge().Data.Color == Colors.Blue)
                     {
                         pen.Color = Color.Blue;
@@ -371,12 +386,16 @@ namespace GraphsRender
             }
             else
             {
-                MessageBox.Show("Создайте граф с ненулевым числом вершин.");
+                ShowWarning("Создайте граф с ненулевым числом вершин.");
             }
         }
         private void taskOneToolStripMenuItem_Click(object sender, EventArgs e)
         {
             taskOneButton_Click(sender, e);
+        }
+        private void taskTwoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            taskTwoButton_Click(sender, e);
         }
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -433,6 +452,11 @@ namespace GraphsRender
                 }
             }
         }
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var box = new AboutBox();
+            box.Show();
+        }
         #endregion
 
         /// <summary>
@@ -457,8 +481,24 @@ namespace GraphsRender
         /// <param name="e"></param>
         private void taskOneButton_Click(object sender, EventArgs e)
         {
-            var taskOne = new TaskOne<VertexDescriptor, EdgeDescriptor>(_graph);
-            taskOne.Result();
+            try
+            {
+                var taskOne = new TaskOne.TaskOne(_graph);
+                _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>) _graph.Clone();
+                _graph = taskOne.Result();
+                resetButton.Visible = true;
+                taskTwoButton.Visible = false;
+                edgeOperationsBox.Enabled = false;
+                taskOneButton.Enabled = false;
+                convertButton.Enabled = false;
+                generateBox.Enabled = false;
+                mainMenu.Enabled = false;
+                PrintGraph();
+            }
+            catch(DataException ex)
+            {
+                ShowWarning(ex.Message);
+            }
         }
 
         /// <summary>
@@ -468,16 +508,30 @@ namespace GraphsRender
         /// <param name="e"></param>
         private void taskTwoButton_Click(object sender, EventArgs e)
         {
-            var newGraph = new TaskTwo.TaskTwo(_graph);
-            _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>)_graph.Clone();
-            _graph = newGraph.Result();
-            resetButton.Visible = true;
-            taskTwoButton.Visible = false;
-            edgeOperationsBox.Enabled = false;
-            taskOneButton.Enabled = false;
-            convertButton.Enabled = false;
-            generateBox.Enabled = false;
-            PrintGraph();
+            try
+            {
+                var form = new TaskTwoForm();
+                form.ShowDialog();
+
+                if (form.NeedToSave)
+                {
+                    var taskTwo = new TaskTwo.TaskTwo(_graph, form.EdgeWeight);
+                    _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>) _graph.Clone();
+                    _graph = taskTwo.Result();
+                    resetButton.Visible = true;
+                    taskTwoButton.Visible = false;
+                    edgeOperationsBox.Enabled = false;
+                    taskOneButton.Enabled = false;
+                    convertButton.Enabled = false;
+                    generateBox.Enabled = false;
+                    mainMenu.Enabled = false;
+                    PrintGraph();
+                }
+            }
+            catch (DataException ex)
+            {
+                ShowWarning(ex.Message);
+            }
         }
 
         /// <summary>
@@ -494,6 +548,7 @@ namespace GraphsRender
             taskOneButton.Enabled = true;
             convertButton.Enabled = true;
             generateBox.Enabled = true;
+            mainMenu.Enabled = true;
             PrintGraph();
         }
         #endregion

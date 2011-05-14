@@ -3,9 +3,9 @@
 namespace GraphsRender.Graph
 {
     /// <summary>
-    /// Перечисление цветов для окраски рёбер
+    /// Перечисление цветов
     /// </summary>
-    public enum Colors { White, Blue };
+    public enum Colors { White, Blue, Yellow, Red };
 
     /// <summary>
     /// Дескриптор вершины
@@ -13,18 +13,18 @@ namespace GraphsRender.Graph
     [Serializable]
     public struct VertexDescriptor
     {
-        /// <summary>
-        /// Имя вершины
-        /// </summary>
         public string Name;
+        public Colors Color;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="n">Имя вершины</param>
-        public VertexDescriptor(string n)
+        /// <param name="c">Цвет вершины (жёлтый по-умолчанию)</param>
+        public VertexDescriptor(string n, Colors c = Colors.Yellow)
         {
             Name = n;
+            Color = c;
         }
     }
     

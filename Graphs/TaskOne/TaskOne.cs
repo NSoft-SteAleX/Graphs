@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+﻿using System.Data;
 using GraphsRender.Graph;
 
 namespace GraphsRender.TaskOne
@@ -7,38 +7,44 @@ namespace GraphsRender.TaskOne
     /// Класс решения задачи #1
     /// Вариант 6: определение вершин отделимости в неориентированном графе
     /// </summary>
-    /// <typeparam name="TVertexDataType">Тип дескриптора вершин графа</typeparam>
-    /// <typeparam name="TEdgeDataType">Тип дескриптора рёбер графа</typeparam>
-    public class TaskOne<TVertexDataType, TEdgeDataType> : ITask<TVertexDataType, TEdgeDataType>
+    public class TaskOne
     {
         /// <summary>
         /// Объект графа
         /// </summary>
-        private SimpleStaticGraph<TVertexDataType, TEdgeDataType> _graph;
+        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph;
 
         /// <summary>
         /// Объект работника, решающего задачу
         /// </summary>
-        private SeparationVertices<TVertexDataType, TEdgeDataType> _worker;
+        private SeparationVertices<VertexDescriptor, EdgeDescriptor> _worker;
 
         /// <summary>
         /// Конструктор, связывает класс решения с графом
         /// </summary>
         /// <param name="graph">Объект графа</param>
-        public TaskOne(SimpleStaticGraph<TVertexDataType, TEdgeDataType> graph)
+        public TaskOne(SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> graph)
         {
-            _graph = (SimpleStaticGraph<TVertexDataType, TEdgeDataType>)graph.Clone(); //Объект клонируется
-            _worker = new SeparationVertices<TVertexDataType, TEdgeDataType>(_graph);
+            if (graph.VertexCount() > 0)
+            {
+                if (graph.Direction() == GraphType.NotOriented)
+                {
+                    _graph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>)graph.Clone(); //Объект клонируется
+                    _worker = new SeparationVertices<VertexDescriptor, EdgeDescriptor>(_graph);
+                }
+                else throw new DataException("Сгенерируйте неориентированный граф.");
+            }
+            else throw new DataException("Сгенерируйте граф с ненулевым числом вершин.");
         }
 
         /// <summary>
         /// Связывание класса решения с указанным графом
         /// </summary>
         /// <param name="graph"></param>
-        public void Set(SimpleStaticGraph<TVertexDataType, TEdgeDataType> graph)
+        public void Set(SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> graph)
         {
-            _graph = (SimpleStaticGraph<TVertexDataType, TEdgeDataType>)graph.Clone();
-            _worker = new SeparationVertices<TVertexDataType, TEdgeDataType>(_graph);
+            _graph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>)graph.Clone();
+            _worker = new SeparationVertices<VertexDescriptor, EdgeDescriptor>(_graph);
         }
 
         /// <summary>
@@ -46,46 +52,27 @@ namespace GraphsRender.TaskOne
         /// </summary>
         public void Restart()
         {
-            _worker = new SeparationVertices<TVertexDataType, TEdgeDataType>(_graph);
+            _worker = new SeparationVertices<VertexDescriptor, EdgeDescriptor>(_graph);
         }
 
         /// <summary>
-        /// Вывод результатов решения
+        /// Получение результата решения
         /// </summary>
-        public void Result()
+        public SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> Result()
         {
-            if (_graph.VertexCount() > 0)
+            int i = 0;
+
+            foreach (var answer in _worker.Answer)
             {
-                if (_graph.Direction() == GraphType.NotOriented)
+                if (answer)
                 {
-                    string result = "";
-                    int i = 0;
-
-                    foreach (var answer in _worker.Answer)
-                    {
-                        if (answer)
-                        {
-                            result += i + ": TRUE\n";
-                        }
-                        else
-                        {
-                            result += i + ": FALSE\n";
-                        }
-
-                        i++;
-                    }
-
-                    MessageBox.Show(result, "Результат задачи #1");
+                    _graph.SetVertex(i, new VertexDescriptor(i.ToString(), Colors.Red));
                 }
-                else
-                {
-                    MainForm.ShowWarning("Сгенерируйте неориентированный граф.");
-                }
+
+                i++;
             }
-            else
-            {
-                MainForm.ShowWarning("Сгенерируйте граф с ненулевым числом вершин.");
-            }
+
+            return _graph;
         }
     }
 }

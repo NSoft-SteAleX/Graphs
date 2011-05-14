@@ -1,10 +1,12 @@
 C:\Users\AlexandrFox\Graphs\Graphs\bin\Debug\GraphsRender.exe
 C:\Users\AlexandrFox\Graphs\Graphs\bin\Debug\GraphsRender.pdb
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.AboutBox.resources
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.EdgeDataSetForm.resources
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.MainForm.resources
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.Properties.Resources.resources
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.RandomEdgesForm.resources
+C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.TaskTwo.TaskTwoForm.resources
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\ResGen.write.1.tlog
 C:\Users\AlexandrFox\Graphs\Graphs\obj\x86\Debug\GraphsRender.exe

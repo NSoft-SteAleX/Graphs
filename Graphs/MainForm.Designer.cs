@@ -49,7 +49,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.functionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.genRandomEdgesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.taskOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taskTwoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.convertButton = new System.Windows.Forms.Button();
@@ -248,7 +250,9 @@
             // 
             this.functionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.genRandomEdgesToolStripMenuItem,
-            this.taskOneToolStripMenuItem});
+            this.toolStripSeparator2,
+            this.taskOneToolStripMenuItem,
+            this.taskTwoToolStripMenuItem});
             this.functionsToolStripMenuItem.Name = "functionsToolStripMenuItem";
             this.functionsToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.functionsToolStripMenuItem.Text = "Ф&ункции";
@@ -260,12 +264,24 @@
             this.genRandomEdgesToolStripMenuItem.Text = "Генерация случайных рёбер";
             this.genRandomEdgesToolStripMenuItem.Click += new System.EventHandler(this.genRandomEdgesToolStripMenuItem_Click);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(267, 6);
+            // 
             // taskOneToolStripMenuItem
             // 
             this.taskOneToolStripMenuItem.Name = "taskOneToolStripMenuItem";
             this.taskOneToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
             this.taskOneToolStripMenuItem.Text = "Определение вершин отделимости";
             this.taskOneToolStripMenuItem.Click += new System.EventHandler(this.taskOneToolStripMenuItem_Click);
+            // 
+            // taskTwoToolStripMenuItem
+            // 
+            this.taskTwoToolStripMenuItem.Name = "taskTwoToolStripMenuItem";
+            this.taskTwoToolStripMenuItem.Size = new System.Drawing.Size(270, 22);
+            this.taskTwoToolStripMenuItem.Text = "Алгоритм Крускалла";
+            this.taskTwoToolStripMenuItem.Click += new System.EventHandler(this.taskTwoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -280,6 +296,7 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.aboutToolStripMenuItem.Text = "О программе";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // convertButton
             // 
@@ -351,7 +368,7 @@
             this.taskTwoButton.Name = "taskTwoButton";
             this.taskTwoButton.Size = new System.Drawing.Size(116, 23);
             this.taskTwoButton.TabIndex = 17;
-            this.taskTwoButton.Text = "Задача №2 (Круск.)";
+            this.taskTwoButton.Text = "Задача #2 (Круск.)";
             this.taskTwoButton.UseVisualStyleBackColor = true;
             this.taskTwoButton.Click += new System.EventHandler(this.taskTwoButton_Click);
             // 
@@ -359,9 +376,9 @@
             // 
             this.resetButton.BackColor = System.Drawing.SystemColors.Highlight;
             this.resetButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.resetButton.Location = new System.Drawing.Point(496, 454);
+            this.resetButton.Location = new System.Drawing.Point(369, 454);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(116, 23);
+            this.resetButton.Size = new System.Drawing.Size(243, 23);
             this.resetButton.TabIndex = 18;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = false;
@@ -438,6 +455,8 @@
         private System.Windows.Forms.Button edgeWeightSetButton;
         private System.Windows.Forms.Button taskTwoButton;
         private System.Windows.Forms.Button resetButton;
+        private System.Windows.Forms.ToolStripMenuItem taskTwoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }
