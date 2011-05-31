@@ -10,3 +10,10 @@ Listbased:
 MatrixBased:
 //-Compile 2 edge existance ckeck functions into one
 //-Edge existance check
+
+ListbasedSE:
+-Link 2 edge existance check into once
+incorrect iterator on single link!!!!!!
+
+
+------------change boot type!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

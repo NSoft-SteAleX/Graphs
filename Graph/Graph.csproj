@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Graph</RootNamespace>
     <AssemblyName>Graph</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -67,18 +68,43 @@
     <Compile Include="Drawing.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Small dialogs\Edge_Extension.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Small dialogs\Edge_Extension.Designer.cs">
+      <DependentUpon>Edge_Extension.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Engine.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="GraphController.cs" />
     <Compile Include="IGraph.cs" />
     <Compile Include="ListBasedGraph.cs" />
+    <Compile Include="ListBasedGraphSE.cs" />
     <Compile Include="MatrixBasedGraph.cs" />
     <Compile Include="Misc.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Replayer player.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Replayer player.Designer.cs">
+      <DependentUpon>Replayer player.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Small dialogs\Task2Dialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Small dialogs\Task2Dialog.Designer.cs">
+      <DependentUpon>Task2Dialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks.cs" />
+    <EmbeddedResource Include="Small dialogs\Edge_Extension.resx">
+      <DependentUpon>Edge_Extension.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,6 +118,13 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Replayer player.resx">
+      <DependentUpon>Replayer player.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Small dialogs\Task2Dialog.resx">
+      <DependentUpon>Task2Dialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -117,6 +150,34 @@
   <ItemGroup>
     <Content Include="1302092670_line_chart.ico" />
     <Content Include="Bug2Fix.txt" />
+    <None Include="Resources\1306385641_type-list.png" />
+    <None Include="Resources\1306385049_mouse.png" />
+    <None Include="Resources\gm_canvas_overview.png" />
+    <None Include="Resources\Nsoft.png" />
+    <None Include="Resources\popup_informative.png" />
+    <None Include="Resources\popup_background.png" />
+    <None Include="Resources\advanced_silent_update.png" />
+    <None Include="Resources\1305795184_exchange.png" />
+    <None Include="Resources\1304949682_monotone_arrow_left.png" />
+    <None Include="Resources\1304949680_monotone_arrow_right_next.png" />
+    <None Include="Resources\1304945083_playback_reload.png" />
+    <None Include="Resources\1304944721_monotone_minus_round.png" />
+    <None Include="Resources\1304944583_monotone_arrow_next_right.png" />
+    <None Include="Resources\1304942976_monotone_arrow_play_right_next.png" />
+    <None Include="Resources\1304944264_monotone_arrow_left_small.png" />
+    <None Include="Resources\1304942974_monotone_arrow_right.png" />
+    <None Include="Resources\1304944026_monotone_pen_write.png" />
+    <None Include="Resources\1304942948_monotone_question.png" />
+    <None Include="Resources\1304922456_sq_plus.png" />
+    <None Include="Resources\1304922462_delete.png" />
+    <None Include="Resources\1304943027_monotone_document_file_paper.png" />
+    <None Include="Resources\1304942655_unknown.png" />
+    <None Include="Resources\1304917464_unlock.png" />
+    <None Include="Resources\progress_fgr_green.png" />
+    <None Include="Resources\progress_fgr_black.png" />
+    <None Include="Resources\1304843732_Arrow Right.png" />
+    <None Include="Resources\1304843728_Arrow Left.png" />
+    <None Include="Resources\1304843356_repeat.png" />
     <None Include="Resources\advanced_wizard_background.png" />
     <None Include="Resources\simple_background.png" />
     <None Include="Resources\liveprogress_background.png" />

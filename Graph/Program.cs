@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿//This source code is property of Nsoftware systems 2005-2011
+//It cant be totally reproduced, maximum of 30% of code amount is allowed to use
+//Cant be reproduced without referance to the Nsoft
+//Cant be used in commercial projects
+//All liciensing questions can be asked at http://nsoft.ucoz.ru
+
+
+using System;
 using System.Windows.Forms;
 
 namespace Graph
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        
         [STAThread]
         static void Main()
         {

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿
 using System.Drawing;
+using System;
 
 namespace Graph
 {
@@ -13,20 +11,18 @@ namespace Graph
            MatrixBased,
            ListBased           
        }
-
+       [Serializable]
        public class Edge<T>
        {
            public int StartVertexid;
            public int EndVertexid;
-           public T Value;
-           public Color rendercolor;
+           public T Value;           
        }
-
+       [Serializable]
        public class Vertex<T>
        {
-           public T value;
-           public int id;
-           public Color rendercolor;
+           public T value;          
+           public int id;           
            public Color _inner;
        }
     }

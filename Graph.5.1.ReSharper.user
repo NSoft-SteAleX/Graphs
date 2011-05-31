@@ -1,0 +1,136 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">True</setting>
+    </boolean>
+  </SettingsComponent>
+  <CompletionStatisticsManager>
+    <ItemStatistics item="Default">
+      <Item value="return" priority="15" />
+      <Item value="true" priority="3" />
+      <Item value="false" priority="1" />
+      <Item value="MatrixBasedGraph" priority="3" />
+      <Item value="bool" priority="11" />
+      <Item value="lineindex" priority="1" />
+      <Item value="_inner" priority="2" />
+      <Item value="public" priority="13" />
+      <Item value="basevertex" priority="0" />
+      <Item value="if" priority="3" />
+      <Item value="Isvalid`0" priority="0" />
+      <Item value="GraphController`0" priority="0" />
+      <Item value="int" priority="4" />
+      <Item value="GraphBase" priority="2" />
+      <Item value="VertexType`0" priority="7" />
+      <Item value="EdgeType`0" priority="9" />
+      <Item value="object" priority="0" />
+      <Item value="new" priority="6" />
+      <Item value="listbased" priority="0" />
+      <Item value="g" priority="12" />
+      <Item value="ListBasedGraphSE" priority="2" />
+      <Item value="else" priority="2" />
+      <Item value="VertexCount" priority="0" />
+      <Item value="oriented" priority="0" />
+      <Item value="private" priority="0" />
+      <Item value="IteratorBase" priority="0" />
+      <Item value="iterator" priority="2" />
+      <Item value="void" priority="1" />
+      <Item value="is" priority="0" />
+      <Item value="it" priority="6" />
+      <Item value="as" priority="0" />
+      <Item value="start" priority="4" />
+      <Item value="end" priority="1" />
+      <Item value="double" priority="0" />
+      <Item value="goto" priority="0" />
+      <Item value="val" priority="0" />
+      <Item value="PrepareIterator`0" priority="1" />
+      <Item value="GraphController" priority="2" />
+      <Item value="SetEdgeWeight`0" priority="0" />
+      <Item value="value" priority="0" />
+      <Item value="vertex" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graph.MatrixBasedGraph`2">
+      <Item value="vertexes" priority="1" />
+      <Item value="VertexCount" priority="0" />
+      <Item value="data" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graph.Misc+Edge`1">
+      <Item value="EndVertexid" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@Graph.MatrixBasedGraph`2">
+      <Item value="Iterator" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graph.GraphBase`2">
+      <Item value="AddEdge`0" priority="0" />
+      <Item value="Getk" priority="0" />
+      <Item value="VertexCount" priority="1" />
+      <Item value="IsDirected" priority="0" />
+      <Item value="DeleteEdge`0" priority="0" />
+      <Item value="EdgeExists`0" priority="0" />
+      <Item value="GetEdgeWeight`0" priority="0" />
+      <Item value="SetEdgeWeight`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:Graph.ITeratorBase`1">
+      <Item value="Reset`0" priority="0" />
+      <Item value="MoveNext`0" priority="0" />
+      <Item value="MoveLast`0" priority="0" />
+      <Item value="Isvalid`0" priority="0" />
+      <Item value="Current`0" priority="0" />
+    </ItemStatistics>
+  </CompletionStatisticsManager>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Program.cs" caret="434" fromTop="12" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Drawing.cs" caret="471" fromTop="8" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Form1.cs" caret="5109" fromTop="24" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Misc.cs" caret="303" fromTop="12" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="2422" fromTop="25" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:IGraph.cs" caret="856" fromTop="22" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:MatrixBasedGraph.cs" caret="3990" fromTop="22" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:MatrixBasedGraph.cs" caret="48" fromTop="1" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:MatrixBasedGraph.cs" caret="243" fromTop="8" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:MatrixBasedGraph.cs" caret="4504" fromTop="33" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:IGraph.cs" caret="0" fromTop="0" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Misc.cs" caret="0" fromTop="0" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Misc.cs" caret="312" fromTop="12" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="145" fromTop="3" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Program.cs" caret="413" fromTop="8" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Program.cs" caret="300" fromTop="4" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:IGraph.cs" caret="844" fromTop="19" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Form1.cs" caret="379" fromTop="15" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="348" fromTop="4" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Form1.cs" caret="775" fromTop="20" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Drawing.cs" caret="1944" fromTop="11" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1272" fromTop="18" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Drawing.cs" caret="718" fromTop="15" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1536" fromTop="26" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1656" fromTop="30" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1775" fromTop="25" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1141" fromTop="10" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:IGraph.cs" caret="188" fromTop="7" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="1375" fromTop="7" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="2609" fromTop="7" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Form1.cs" caret="5227" fromTop="19" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:Form1.cs" caret="5191" fromTop="26" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="663" fromTop="4" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="2411" fromTop="36" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:GraphController.cs" caret="2529" fromTop="30" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:IGraph.cs" caret="951" fromTop="27" />
+      <File id="665A1989-C2CF-4459-917C-B0FE72EB706A/f:MatrixBasedGraph.cs" caret="4112" fromTop="14" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

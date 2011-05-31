@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+
 using System.Text;
 
 namespace Graph
@@ -10,6 +10,7 @@ namespace Graph
        
         List<List<Misc.Vertex<VertexType>>> data;// conatains links between
         public List<Misc.Edge<EdgeType>> edges = new List<Misc.Edge<EdgeType>>();//store all edges objects
+        public List<Misc.Vertex<VertexType>> vertexes = new List<Misc.Vertex<VertexType>>();// contains vertex objects
 
 
         public ListBasedGraph(int VertexCount, bool oriented)
@@ -39,6 +40,10 @@ namespace Graph
         {
             throw new NotSupportedException("Cant cast to same type");
         }
+        public override Misc.Vertex<VertexType> GetVertex(int id)
+        {
+            return GetVertexById(id);
+        }
 
         Misc.Vertex<VertexType> GetVertexById(int vertexid)
         {
@@ -58,8 +63,7 @@ namespace Graph
             catch(Exception e)
             {
                 return false;
-            }                      
-           
+            }     
         }
 
         public override bool AddEdge(int start, int  end, EdgeType val)// adds new edge with data specified
