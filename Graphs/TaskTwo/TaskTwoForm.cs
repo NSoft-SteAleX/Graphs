@@ -27,7 +27,7 @@ namespace GraphsRender.TaskTwo
                 }
                 catch
                 {
-                    MainForm.ShowWarning("Введите числовое значение!");
+                    s.ShowWarning("Введите числовое значение!");
                     edgeWeightText.Text = "";
                 }
             }

@@ -1,6 +1,6 @@
 ﻿namespace GraphsRender
 {
-    partial class MainForm
+    partial class s
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(s));
             this.generateButton = new System.Windows.Forms.Button();
             this.genLabel = new System.Windows.Forms.Label();
             this.vertexCountText = new System.Windows.Forms.TextBox();
@@ -62,9 +62,17 @@
             this.edgeInfoLabel = new System.Windows.Forms.Label();
             this.taskTwoButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
+            this.iteratorOperationsBox = new System.Windows.Forms.GroupBox();
+            this.nextIteratorButton = new System.Windows.Forms.Button();
+            this.setIteratorButton = new System.Windows.Forms.Button();
+            this.beginIteratorButton = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.setIteratorVertex = new System.Windows.Forms.Label();
             this.generateBox.SuspendLayout();
             this.mainMenu.SuspendLayout();
             this.edgeOperationsBox.SuspendLayout();
+            this.iteratorOperationsBox.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // generateButton
@@ -116,7 +124,7 @@
             // 
             // addEdgeButton
             // 
-            this.addEdgeButton.Location = new System.Drawing.Point(6, 17);
+            this.addEdgeButton.Location = new System.Drawing.Point(6, 19);
             this.addEdgeButton.Name = "addEdgeButton";
             this.addEdgeButton.Size = new System.Drawing.Size(71, 23);
             this.addEdgeButton.TabIndex = 4;
@@ -126,7 +134,7 @@
             // 
             // deleteEdgeButton
             // 
-            this.deleteEdgeButton.Location = new System.Drawing.Point(83, 17);
+            this.deleteEdgeButton.Location = new System.Drawing.Point(83, 19);
             this.deleteEdgeButton.Name = "deleteEdgeButton";
             this.deleteEdgeButton.Size = new System.Drawing.Size(63, 23);
             this.deleteEdgeButton.TabIndex = 5;
@@ -185,7 +193,7 @@
             this.generateBox.Controls.Add(this.vertexCountText);
             this.generateBox.Controls.Add(this.typeSelectBox);
             this.generateBox.Controls.Add(this.typeLabel);
-            this.generateBox.Location = new System.Drawing.Point(318, 480);
+            this.generateBox.Location = new System.Drawing.Point(318, 505);
             this.generateBox.Name = "generateBox";
             this.generateBox.Size = new System.Drawing.Size(294, 70);
             this.generateBox.TabIndex = 10;
@@ -310,7 +318,7 @@
             // 
             // isEdgeButton
             // 
-            this.isEdgeButton.Location = new System.Drawing.Point(152, 17);
+            this.isEdgeButton.Location = new System.Drawing.Point(152, 19);
             this.isEdgeButton.Name = "isEdgeButton";
             this.isEdgeButton.Size = new System.Drawing.Size(70, 23);
             this.isEdgeButton.TabIndex = 13;
@@ -324,7 +332,7 @@
             this.edgeOperationsBox.Controls.Add(this.addEdgeButton);
             this.edgeOperationsBox.Controls.Add(this.isEdgeButton);
             this.edgeOperationsBox.Controls.Add(this.deleteEdgeButton);
-            this.edgeOperationsBox.Location = new System.Drawing.Point(12, 500);
+            this.edgeOperationsBox.Location = new System.Drawing.Point(12, 525);
             this.edgeOperationsBox.Name = "edgeOperationsBox";
             this.edgeOperationsBox.Size = new System.Drawing.Size(300, 50);
             this.edgeOperationsBox.TabIndex = 14;
@@ -333,7 +341,7 @@
             // 
             // edgeWeightSetButton
             // 
-            this.edgeWeightSetButton.Location = new System.Drawing.Point(228, 17);
+            this.edgeWeightSetButton.Location = new System.Drawing.Point(228, 19);
             this.edgeWeightSetButton.Name = "edgeWeightSetButton";
             this.edgeWeightSetButton.Size = new System.Drawing.Size(66, 23);
             this.edgeWeightSetButton.TabIndex = 14;
@@ -343,11 +351,11 @@
             // 
             // taskOneButton
             // 
-            this.taskOneButton.Location = new System.Drawing.Point(369, 454);
+            this.taskOneButton.Location = new System.Drawing.Point(318, 457);
             this.taskOneButton.Name = "taskOneButton";
-            this.taskOneButton.Size = new System.Drawing.Size(121, 23);
+            this.taskOneButton.Size = new System.Drawing.Size(145, 40);
             this.taskOneButton.TabIndex = 15;
-            this.taskOneButton.Text = "Задача #1 (Вер. отд.)";
+            this.taskOneButton.Text = "Задача #1 (Вершины отделимости)";
             this.taskOneButton.UseVisualStyleBackColor = true;
             this.taskOneButton.Click += new System.EventHandler(this.taskOneButton_Click);
             // 
@@ -364,11 +372,11 @@
             // 
             // taskTwoButton
             // 
-            this.taskTwoButton.Location = new System.Drawing.Point(496, 454);
+            this.taskTwoButton.Location = new System.Drawing.Point(467, 457);
             this.taskTwoButton.Name = "taskTwoButton";
-            this.taskTwoButton.Size = new System.Drawing.Size(116, 23);
+            this.taskTwoButton.Size = new System.Drawing.Size(145, 40);
             this.taskTwoButton.TabIndex = 17;
-            this.taskTwoButton.Text = "Задача #2 (Круск.)";
+            this.taskTwoButton.Text = "Задача #2 (Мод. алгоритм Крускалла)";
             this.taskTwoButton.UseVisualStyleBackColor = true;
             this.taskTwoButton.Click += new System.EventHandler(this.taskTwoButton_Click);
             // 
@@ -376,24 +384,86 @@
             // 
             this.resetButton.BackColor = System.Drawing.SystemColors.Highlight;
             this.resetButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.resetButton.Location = new System.Drawing.Point(369, 454);
+            this.resetButton.Location = new System.Drawing.Point(318, 457);
             this.resetButton.Name = "resetButton";
-            this.resetButton.Size = new System.Drawing.Size(243, 23);
+            this.resetButton.Size = new System.Drawing.Size(294, 40);
             this.resetButton.TabIndex = 18;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = false;
             this.resetButton.Visible = false;
             this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
-            // MainForm
+            // iteratorOperationsBox
+            // 
+            this.iteratorOperationsBox.Controls.Add(this.beginIteratorButton);
+            this.iteratorOperationsBox.Controls.Add(this.nextIteratorButton);
+            this.iteratorOperationsBox.Controls.Add(this.setIteratorButton);
+            this.iteratorOperationsBox.Location = new System.Drawing.Point(12, 472);
+            this.iteratorOperationsBox.Name = "iteratorOperationsBox";
+            this.iteratorOperationsBox.Size = new System.Drawing.Size(235, 50);
+            this.iteratorOperationsBox.TabIndex = 19;
+            this.iteratorOperationsBox.TabStop = false;
+            this.iteratorOperationsBox.Text = "Операции с итератором";
+            // 
+            // nextIteratorButton
+            // 
+            this.nextIteratorButton.Location = new System.Drawing.Point(83, 19);
+            this.nextIteratorButton.Name = "nextIteratorButton";
+            this.nextIteratorButton.Size = new System.Drawing.Size(63, 23);
+            this.nextIteratorButton.TabIndex = 1;
+            this.nextIteratorButton.Text = "К след.";
+            this.nextIteratorButton.UseVisualStyleBackColor = true;
+            this.nextIteratorButton.Click += new System.EventHandler(this.nextIteratorButton_Click);
+            // 
+            // setIteratorButton
+            // 
+            this.setIteratorButton.Location = new System.Drawing.Point(6, 19);
+            this.setIteratorButton.Name = "setIteratorButton";
+            this.setIteratorButton.Size = new System.Drawing.Size(71, 23);
+            this.setIteratorButton.TabIndex = 0;
+            this.setIteratorButton.Text = "Установка";
+            this.setIteratorButton.UseVisualStyleBackColor = true;
+            this.setIteratorButton.Click += new System.EventHandler(this.setIteratorButton_Click);
+            // 
+            // beginIteratorButton
+            // 
+            this.beginIteratorButton.Location = new System.Drawing.Point(152, 19);
+            this.beginIteratorButton.Name = "beginIteratorButton";
+            this.beginIteratorButton.Size = new System.Drawing.Size(75, 23);
+            this.beginIteratorButton.TabIndex = 2;
+            this.beginIteratorButton.Text = "На первую";
+            this.beginIteratorButton.UseVisualStyleBackColor = true;
+            this.beginIteratorButton.Click += new System.EventHandler(this.beginIteratorButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.setIteratorVertex);
+            this.panel1.Location = new System.Drawing.Point(253, 478);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(58, 43);
+            this.panel1.TabIndex = 20;
+            // 
+            // setIteratorVertex
+            // 
+            this.setIteratorVertex.AutoSize = true;
+            this.setIteratorVertex.Location = new System.Drawing.Point(22, 16);
+            this.setIteratorVertex.Name = "setIteratorVertex";
+            this.setIteratorVertex.Size = new System.Drawing.Size(13, 13);
+            this.setIteratorVertex.TabIndex = 0;
+            this.setIteratorVertex.Text = "?";
+            // 
+            // s
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 557);
+            this.ClientSize = new System.Drawing.Size(624, 582);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.edgeInfoLabel);
             this.Controls.Add(this.resetButton);
+            this.Controls.Add(this.iteratorOperationsBox);
             this.Controls.Add(this.taskTwoButton);
             this.Controls.Add(this.taskOneButton);
-            this.Controls.Add(this.edgeInfoLabel);
             this.Controls.Add(this.edgeOperationsBox);
             this.Controls.Add(this.convertButton);
             this.Controls.Add(this.graphInfoLabel);
@@ -405,9 +475,9 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(630, 585);
-            this.MinimumSize = new System.Drawing.Size(630, 585);
-            this.Name = "MainForm";
+            this.MaximumSize = new System.Drawing.Size(630, 610);
+            this.MinimumSize = new System.Drawing.Size(630, 610);
+            this.Name = "s";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Рендер Графов";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -417,6 +487,9 @@
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
             this.edgeOperationsBox.ResumeLayout(false);
+            this.iteratorOperationsBox.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -457,6 +530,12 @@
         private System.Windows.Forms.Button resetButton;
         private System.Windows.Forms.ToolStripMenuItem taskTwoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.GroupBox iteratorOperationsBox;
+        private System.Windows.Forms.Button setIteratorButton;
+        private System.Windows.Forms.Button nextIteratorButton;
+        private System.Windows.Forms.Button beginIteratorButton;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label setIteratorVertex;
 
     }
 }

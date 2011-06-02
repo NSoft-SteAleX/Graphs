@@ -10,12 +10,12 @@
   <CompletionStatisticsManager>
     <ItemStatistics item="Default">
       <Item value="public" priority="13" />
-      <Item value="List" priority="2" />
+      <Item value="List" priority="3" />
       <Item value="Edge`0" priority="4" />
-      <Item value="var" priority="6" />
-      <Item value="new" priority="11" />
-      <Item value="int" priority="19" />
-      <Item value="for" priority="4" />
+      <Item value="var" priority="10" />
+      <Item value="new" priority="17" />
+      <Item value="int" priority="20" />
+      <Item value="for" priority="5" />
       <Item value="v" priority="3" />
       <Item value="VertexCount`0" priority="0" />
       <Item value="Iterator`0" priority="1" />
@@ -29,19 +29,19 @@
       <Item value="V" priority="0" />
       <Item value="I" priority="0" />
       <Item value="NullReferenceException`0" priority="0" />
-      <Item value="if" priority="10" />
+      <Item value="if" priority="16" />
       <Item value="IsAlive`0" priority="0" />
-      <Item value="_graph" priority="18" />
+      <Item value="_graph" priority="23" />
       <Item value="_listIter" priority="0" />
-      <Item value="iter" priority="6" />
+      <Item value="iter" priority="8" />
       <Item value="_iter" priority="0" />
       <Item value="t" priority="1" />
-      <Item value="foreach" priority="1" />
+      <Item value="foreach" priority="2" />
       <Item value="string" priority="1" />
       <Item value="txt" priority="1" />
       <Item value="edge" priority="7" />
       <Item value="MessageBox`0" priority="1" />
-      <Item value="private" priority="6" />
+      <Item value="private" priority="9" />
       <Item value="IDictionary" priority="0" />
       <Item value="while" priority="0" />
       <Item value="id" priority="5" />
@@ -49,16 +49,16 @@
       <Item value="nguid" priority="0" />
       <Item value="sz" priority="7" />
       <Item value="n" priority="0" />
-      <Item value="i" priority="9" />
+      <Item value="i" priority="10" />
       <Item value="find`0" priority="1" />
       <Item value="bool" priority="0" />
-      <Item value="void" priority="0" />
+      <Item value="void" priority="2" />
       <Item value="FindUnite`0" priority="1" />
-      <Item value="else" priority="3" />
-      <Item value="VertexDescriptor`0" priority="4" />
-      <Item value="EdgeDescriptor`0" priority="4" />
+      <Item value="else" priority="7" />
+      <Item value="VertexDescriptor`0" priority="5" />
+      <Item value="EdgeDescriptor`0" priority="5" />
       <Item value="UnionFind`0" priority="0" />
-      <Item value="SimpleStaticGraph" priority="0" />
+      <Item value="SimpleStaticGraph" priority="1" />
       <Item value="graph" priority="6" />
       <Item value="uf" priority="1" />
       <Item value="UnionFind" priority="0" />
@@ -81,7 +81,7 @@
       <Item value="SystemColorsChanged" priority="0" />
       <Item value="pen" priority="0" />
       <Item value="Color`0" priority="0" />
-      <Item value="PrintGraph`0" priority="0" />
+      <Item value="PrintGraph`0" priority="3" />
       <Item value="backup" priority="0" />
       <Item value="CruskallAlgorithm`0" priority="0" />
       <Item value="where" priority="1" />
@@ -93,9 +93,9 @@
       <Item value="TaskTwo" priority="2" />
       <Item value="TaskTwo`0" priority="0" />
       <Item value="resetButton" priority="1" />
-      <Item value="true" priority="5" />
+      <Item value="true" priority="6" />
       <Item value="taskTwoButton" priority="1" />
-      <Item value="false" priority="7" />
+      <Item value="false" priority="8" />
       <Item value="edgeOperationsBox" priority="1" />
       <Item value="taskOneButton" priority="0" />
       <Item value="convertButton" priority="0" />
@@ -110,14 +110,14 @@
       <Item value="e" priority="0" />
       <Item value="catch" priority="1" />
       <Item value="InvalidDataException`0" priority="0" />
-      <Item value="ShowWarning`0" priority="1" />
+      <Item value="ShowWarning`0" priority="6" />
       <Item value="ex" priority="0" />
       <Item value="Exception`0" priority="0" />
       <Item value="DataException`0" priority="1" />
       <Item value="taskTwoButton_Click`0" priority="0" />
       <Item value="sender" priority="0" />
       <Item value="mainMenu" priority="1" />
-      <Item value="double" priority="6" />
+      <Item value="double" priority="7" />
       <Item value="NeedToSave" priority="0" />
       <Item value="EdgeWeight" priority="0" />
       <Item value="edgeWeightText" priority="4" />
@@ -132,10 +132,39 @@
       <Item value="answer" priority="1" />
       <Item value="TVertexDataType" priority="0" />
       <Item value="TVertexDataType`0" priority="0" />
-      <Item value="VertexDescriptor" priority="0" />
+      <Item value="VertexDescriptor" priority="1" />
       <Item value="Yellow" priority="0" />
       <Item value="TaskOne`0" priority="0" />
-      <Item value="Red" priority="0" />
+      <Item value="Red" priority="2" />
+      <Item value="_gdi" priority="1" />
+      <Item value="Font`0" priority="0" />
+      <Item value="font" priority="0" />
+      <Item value="Font" priority="3" />
+      <Item value="brush" priority="3" />
+      <Item value="p1" priority="3" />
+      <Item value="PointF" priority="1" />
+      <Item value="p2" priority="0" />
+      <Item value="Rectangle`0" priority="1" />
+      <Item value="weights" priority="1" />
+      <Item value="rectangle" priority="0" />
+      <Item value="Brushes`0" priority="1" />
+      <Item value="KeyValuePair" priority="0" />
+      <Item value="KeyValuePair&lt;double,Rectangle&gt;" priority="0" />
+      <Item value="rect" priority="1" />
+      <Item value="d" priority="1" />
+      <Item value="Oriented" priority="0" />
+      <Item value="distance" priority="0" />
+      <Item value="Label`0" priority="0" />
+      <Item value="_vertexTwo" priority="6" />
+      <Item value="iteratorGroupBox" priority="0" />
+      <Item value="iteratorOperationsBox" priority="1" />
+      <Item value="BlockUI`0" priority="0" />
+      <Item value="SimpleStaticGraph&lt;VertexDescriptor,EdgeDescriptor&gt;.Iterator" priority="1" />
+      <Item value="_vertexOne" priority="5" />
+      <Item value="_iterator" priority="9" />
+      <Item value="null" priority="4" />
+      <Item value="ResetVertexColors`0" priority="3" />
+      <Item value="setIteratorVertex" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.SimpleStaticGraph`2+MatrixGraph">
       <Item value="matrix" priority="0" />
@@ -147,13 +176,14 @@
       <Item value="Current" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.KeyValuePair`2">
-      <Item value="Value" priority="0" />
+      <Item value="Value" priority="2" />
+      <Item value="Key" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.SimpleStaticGraph`2+Iterator">
-      <Item value="Current`0" priority="1" />
-      <Item value="Next`0" priority="0" />
-      <Item value="GetCurrentEdge`0" priority="2" />
-      <Item value="Begin`0" priority="0" />
+      <Item value="Current`0" priority="2" />
+      <Item value="Next`0" priority="1" />
+      <Item value="GetCurrentEdge`0" priority="4" />
+      <Item value="Begin`0" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.SimpleStaticGraph`2+GeneralGraph+GeneralIterator">
       <Item value="GetCurrentEdge`0" priority="0" />
@@ -161,32 +191,33 @@
     <ItemStatistics item="Qualified:GraphsRender.Graph.SimpleStaticGraph`2+Edge">
       <Item value="StartVertex" priority="5" />
       <Item value="EndVertex" priority="4" />
-      <Item value="Data" priority="6" />
+      <Item value="Data" priority="8" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Collections.Generic.List`1">
-      <Item value="Add`0" priority="1" />
+      <Item value="Add`0" priority="2" />
       <Item value="Sort`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.SimpleStaticGraph`2">
       <Item value="GetEdgeData`0" priority="0" />
       <Item value="GetEdges`0" priority="2" />
-      <Item value="VertexCount`0" priority="3" />
+      <Item value="VertexCount`0" priority="4" />
       <Item value="EdgeCount`0" priority="0" />
       <Item value="SetEdge`0" priority="0" />
       <Item value="Clone`0" priority="1" />
-      <Item value="Direction`0" priority="0" />
-      <Item value="SetVertex`0" priority="2" />
-      <Item value="GetVertex`0" priority="1" />
+      <Item value="Direction`0" priority="1" />
+      <Item value="SetVertex`0" priority="4" />
+      <Item value="GetVertex`0" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@System.Windows.Forms.MessageBox">
       <Item value="Show`0" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.EdgeDescriptor">
-      <Item value="Weight" priority="4" />
+      <Item value="Weight" priority="6" />
       <Item value="Color" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Double">
       <Item value="CompareTo`0" priority="0" />
+      <Item value="ToString`0" priority="2" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.TaskTwo.UnionFind">
       <Item value="Find`0" priority="1" />
@@ -194,6 +225,7 @@
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GraphsRender.Graph.Colors">
       <Item value="Blue" priority="1" />
+      <Item value="Yellow" priority="1" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Drawing.Pen">
       <Item value="Clone`0" priority="0" />
@@ -216,7 +248,7 @@
       <Item value="Visible" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Windows.Forms.GroupBox">
-      <Item value="Enabled" priority="3" />
+      <Item value="Enabled" priority="5" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:@GraphsRender.MainForm">
       <Item value="ShowWarning`0" priority="0" />
@@ -248,58 +280,84 @@
       <Item value="Show`0" priority="0" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:System.Int32">
-      <Item value="ToString`0" priority="1" />
+      <Item value="ToString`0" priority="3" />
     </ItemStatistics>
     <ItemStatistics item="Qualified:GraphsRender.Graph.VertexDescriptor">
-      <Item value="Color" priority="1" />
+      <Item value="Color" priority="2" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Graphics">
+      <Item value="DrawString`0" priority="0" />
+      <Item value="FillRectangle`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Font">
+      <Item value="FontFamily" priority="0" />
+      <Item value="SystemFontName" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Drawing.Point">
+      <Item value="X" priority="4" />
+      <Item value="Y" priority="3" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Control">
+      <Item value="Location" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@System.Drawing.Brushes">
+      <Item value="Black" priority="0" />
+      <Item value="Red" priority="0" />
+      <Item value="Gray" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:@GraphsRender.Graph.SimpleStaticGraph`2">
+      <Item value="Iterator`0" priority="0" />
+    </ItemStatistics>
+    <ItemStatistics item="Qualified:System.Windows.Forms.Label">
+      <Item value="Text" priority="1" />
     </ItemStatistics>
   </CompletionStatisticsManager>
   <RecentFiles>
     <RecentFiles>
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:UnionFind.cs" caret="1808" fromTop="39" />
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:SeparationVertices.cs" caret="0" fromTop="0" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:TaskTwoForm.cs" caret="982" fromTop="32" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:TaskTwoForm.cs" caret="975" fromTop="32" />
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:EdgeDataSetForm.cs" caret="670" fromTop="17" />
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Properties/f:AssemblyInfo.cs" caret="645" fromTop="14" />
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:AboutBox.cs" caret="362" fromTop="12" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="20270" fromTop="12" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="1246" fromTop="36" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="19083" fromTop="139" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="47" fromTop="2" />
       <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:CruskallAlgorithm.cs" caret="261" fromTop="10" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:TaskTwo.cs" caret="980" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:TaskTwo.cs" caret="980" fromTop="31" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="1246" fromTop="36" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="47" fromTop="2" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="28115" fromTop="28" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="22929" fromTop="24" />
     </RecentFiles>
     <RecentEdits>
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:SimpleStaticGraph.cs" caret="4348" fromTop="31" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3327" fromTop="21" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3941" fromTop="27" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="3939" fromTop="29" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="9361" fromTop="22" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="361" fromTop="10" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="683" fromTop="19" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="548" fromTop="19" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="389" fromTop="16" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="564" fromTop="21" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="231" fromTop="8" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="1823" fromTop="25" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="2053" fromTop="24" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="5436" fromTop="33" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="1338" fromTop="33" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="989" fromTop="28" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="860" fromTop="24" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="2157" fromTop="24" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="2588" fromTop="38" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="17387" fromTop="27" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="16910" fromTop="10" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="19083" fromTop="15" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:Graph/f:DataStructures.cs" caret="167" fromTop="7" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="2497" fromTop="35" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="6490" fromTop="24" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="6681" fromTop="28" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="6830" fromTop="32" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskOne/f:TaskOne.cs" caret="18" fromTop="0" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="16270" fromTop="32" />
-      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/d:TaskTwo/f:TaskTwo.cs" caret="273" fromTop="9" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="652" fromTop="19" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="37" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="31" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="36" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23214" fromTop="26" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="24" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="1428" fromTop="24" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="13" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="22" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="12" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="21689" fromTop="8" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="16852" fromTop="15" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="22904" fromTop="33" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="19213" fromTop="25" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="20558" fromTop="25" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="18334" fromTop="33" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="20288" fromTop="36" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="22417" fromTop="29" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23214" fromTop="31" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23204" fromTop="29" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="19426" fromTop="23" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="7140" fromTop="25" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="7163" fromTop="26" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="17216" fromTop="25" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="18005" fromTop="32" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="20885" fromTop="35" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="21586" fromTop="21" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="23214" fromTop="21" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="19940" fromTop="21" />
+      <File id="592B3E1F-4A93-49E2-AC60-AFF89AC899EC/f:MainForm.cs" caret="12587" fromTop="18" />
     </RecentEdits>
   </RecentFiles>
   <NAntValidationSettings>

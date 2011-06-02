@@ -12,12 +12,17 @@ using GraphsRender.TaskTwo;
 
 namespace GraphsRender
 {
-    public partial class MainForm : Form
+    public partial class s : Form
     {
         /// <summary>
         /// Объект графа
         /// </summary>
         private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor> _graph = new SimpleStaticGraph<VertexDescriptor,EdgeDescriptor>();
+
+        /// <summary>
+        /// Объект итератора графа
+        /// </summary>
+        private SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Iterator _iterator;
 
         /// <summary>
         /// Объект графа для бэкапов во время
@@ -38,9 +43,10 @@ namespace GraphsRender
         /// <summary>
         /// Конструктор формы
         /// </summary>
-        public MainForm()
+        public s()
         {
             InitializeComponent();
+            _iterator = null;
         }
 
         /// <summary>
@@ -93,7 +99,10 @@ namespace GraphsRender
         {
             if (_vertexOne != -1 && _vertexTwo != -1)
             {
-                _graph.InsertEdge(_vertexOne, _vertexTwo);
+                if(!_graph.InsertEdge(_vertexOne, _vertexTwo))
+                {
+                    ShowWarning("Ребро между вершинами " + _vertexOne + " и " + _vertexTwo + " уже существует!");
+                }
                 _vertexOne = _vertexTwo = -1;
             }
             else
@@ -113,7 +122,10 @@ namespace GraphsRender
         {
             if (_vertexOne != -1 && _vertexTwo != -1)
             {
-                _graph.DeleteEdge(_vertexOne, _vertexTwo);
+                if(!_graph.DeleteEdge(_vertexOne, _vertexTwo))
+                {
+                    ShowWarning("Ребра между вершинами "+_vertexOne+" и "+_vertexTwo+" не существует!");
+                }
                 _vertexOne = _vertexTwo = -1;
             }
             else
@@ -180,6 +192,7 @@ namespace GraphsRender
         {
             double divconst = _graph.VertexCount() / 2d;
             var points = new List<Rectangle>();
+            var weights = new List<KeyValuePair<double, Rectangle>>();
 
             _gdi.Clear(Color.Gray);
             renderFrame.Controls.Clear();
@@ -199,13 +212,13 @@ namespace GraphsRender
                 p.Controls.Add(l);
                 p.Name = i.ToString();
 
-                if(_graph.GetVertex(i).Color == Colors.Red)
-                {
-                    p.BackgroundImage = GetImageFromPath("layout\\SeparationVertex.png");
-                }
-                else if (i == _vertexOne || i == _vertexTwo)
+                if (i == _vertexOne || i == _vertexTwo)
                 {
                     p.BackgroundImage = GetImageFromPath("layout\\SelectedVertex.png");
+                }
+                else if(_graph.GetVertex(i).Color == Colors.Red)
+                {
+                    p.BackgroundImage = GetImageFromPath("layout\\SeparationVertex.png");
                 }
                 else
                 {
@@ -249,10 +262,23 @@ namespace GraphsRender
                     Point p1 = c1.Location + new Size(c1.Size.Width / 2, c1.Size.Height / 2);
                     Point p2 = c2.Location + new Size(c2.Size.Width / 2, c2.Size.Height / 2);
 
-                    //Solution made by Nik
-                    //Don't ask why it's 0.2 coeff. T___T
-                    points.Add(new Rectangle(p2 - new Size((int)(0.2 * (p2.X - p1.X)) + 5, 
-                        (int)(0.2 * (p2.Y - p1.Y)) + 5), new Size(10, 10)));
+                    //Установка полигонов для отображения весов и направлений
+                    var r1 = new Rectangle(p2 - new Size((int) (0.2*(p2.X - p1.X)) + 5,
+                        (int) (0.2*(p2.Y - p1.Y)) + 5), new Size(10, 10));
+
+                    var distance = 0.5; //Удаление от вершины
+                    if(_graph.Direction() == GraphType.Oriented)
+                    {
+                        distance = 0.4;
+                    }
+
+                    var r2 = new Rectangle(p2 - new Size((int)(distance * (p2.X - p1.X)) + 5,
+                        (int)(distance * (p2.Y - p1.Y)) + 5), new Size(20, 12));
+
+                    points.Add(r1);
+                    weights.Add(new KeyValuePair<double, Rectangle>(iter.GetCurrentEdge().Data.Weight, r2));
+
+                    //Отрисовка линии
                     _gdi.DrawLine(pen, p1, p2);
 
                     iter.Next();
@@ -263,10 +289,16 @@ namespace GraphsRender
             //Solution made by Nik
             if (_graph.Direction() == GraphType.Oriented)
             {
-                foreach (Rectangle r in points)
+                foreach (var r in points)
                 {
                     _gdi.FillEllipse(brush, r);
                 }
+            }
+
+            foreach (var d in weights)
+            {
+                _gdi.FillRectangle(Brushes.Gray, d.Value);
+                _gdi.DrawString(d.Key.ToString(), new Font("Arial", 8), brush, d.Value);
             }
 
             UpdateGraphLabel();
@@ -338,6 +370,8 @@ namespace GraphsRender
         private void convertButton_Click(object sender, EventArgs e)
         {
             _graph.Convert();
+            _iterator = null;
+            setIteratorVertex.Text = "?";
             PrintGraph();
         }
 
@@ -459,20 +493,6 @@ namespace GraphsRender
         }
         #endregion
 
-        /// <summary>
-        /// Закрытие формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question) != DialogResult.Yes)
-            {
-                e.Cancel = true;
-            }
-        }
-
         #region Обработка задач
         /// <summary>
         /// Решение "Задачи 1"
@@ -483,16 +503,12 @@ namespace GraphsRender
         {
             try
             {
+                ResetVertexColors();
+                _vertexOne = _vertexTwo = -1;
                 var taskOne = new TaskOne.TaskOne(_graph);
                 _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>) _graph.Clone();
                 _graph = taskOne.Result();
-                resetButton.Visible = true;
-                taskTwoButton.Visible = false;
-                edgeOperationsBox.Enabled = false;
-                taskOneButton.Enabled = false;
-                convertButton.Enabled = false;
-                generateBox.Enabled = false;
-                mainMenu.Enabled = false;
+                BlockUI();
                 PrintGraph();
             }
             catch(DataException ex)
@@ -510,6 +526,8 @@ namespace GraphsRender
         {
             try
             {
+                ResetVertexColors();
+                _vertexOne = _vertexTwo = -1;
                 var form = new TaskTwoForm();
                 form.ShowDialog();
 
@@ -518,19 +536,42 @@ namespace GraphsRender
                     var taskTwo = new TaskTwo.TaskTwo(_graph, form.EdgeWeight);
                     _backupGraph = (SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>) _graph.Clone();
                     _graph = taskTwo.Result();
-                    resetButton.Visible = true;
-                    taskTwoButton.Visible = false;
-                    edgeOperationsBox.Enabled = false;
-                    taskOneButton.Enabled = false;
-                    convertButton.Enabled = false;
-                    generateBox.Enabled = false;
-                    mainMenu.Enabled = false;
+                    BlockUI();
                     PrintGraph();
                 }
             }
             catch (DataException ex)
             {
                 ShowWarning(ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Блокировка основных элементов интерфейса
+        /// </summary>
+        private void BlockUI()
+        {
+            resetButton.Visible = true;
+            taskTwoButton.Visible = false;
+            iteratorOperationsBox.Enabled = false;
+            edgeOperationsBox.Enabled = false;
+            taskOneButton.Enabled = false;
+            convertButton.Enabled = false;
+            generateBox.Enabled = false;
+            mainMenu.Enabled = false;
+        }
+
+        /// <summary>
+        /// Ресет цветов вершин для корректного отображения результатов
+        /// </summary>
+        private void ResetVertexColors()
+        {
+            for (int i = 0; i < _graph.VertexCount(); i++)
+            {
+                if (_graph.GetVertex(i).Color == Colors.Red)
+                {
+                    _graph.SetVertex(i, new VertexDescriptor(i.ToString(), Colors.Yellow));
+                }
             }
         }
 
@@ -542,8 +583,11 @@ namespace GraphsRender
         private void resetButton_Click(object sender, EventArgs e)
         {
             _graph = _backupGraph;
+            _iterator = null;
+            setIteratorVertex.Text = "?";
             resetButton.Visible = false;
             taskTwoButton.Visible = true;
+            iteratorOperationsBox.Enabled = true;
             edgeOperationsBox.Enabled = true;
             taskOneButton.Enabled = true;
             convertButton.Enabled = true;
@@ -552,6 +596,77 @@ namespace GraphsRender
             PrintGraph();
         }
         #endregion
+
+        #region Работа с итератором
+        private void setIteratorButton_Click(object sender, EventArgs e)
+        {
+            if (_vertexOne != -1)
+            {
+                ResetVertexColors();
+                _iterator = new SimpleStaticGraph<VertexDescriptor, EdgeDescriptor>.Iterator(_graph, _vertexOne);
+                _iterator.Begin();
+                _graph.SetVertex(_iterator.Current(), new VertexDescriptor(_vertexOne.ToString(), Colors.Red));
+                setIteratorVertex.Text = _vertexOne.ToString();
+                _vertexOne = _vertexTwo = -1;
+                PrintGraph();
+            }
+            else
+            {
+                ShowWarning("Выберите начальную вершину!");
+            }
+        }
+        private void beginIteratorButton_Click(object sender, EventArgs e)
+        {
+            if(_iterator != null)
+            {
+                ResetVertexColors();
+                _iterator.Begin();
+                _graph.SetVertex(_iterator.Current(), new VertexDescriptor(_vertexOne.ToString(), Colors.Red));
+                PrintGraph();
+            }
+            else
+            {
+                ShowWarning("Итератор не установлен!");
+            }
+        }
+        private void nextIteratorButton_Click(object sender, EventArgs e)
+        {
+            if (_iterator != null)
+            {
+                _graph.SetVertex(_iterator.Current(), new VertexDescriptor(_iterator.Current().ToString(), Colors.Yellow));
+
+                if (_iterator.Next())
+                {
+                    _graph.SetVertex(_iterator.Current(),
+                                     new VertexDescriptor(_iterator.Current().ToString(), Colors.Red));
+                }
+                else
+                {
+                    ShowWarning("Итератор достиг последней смежной вершины!");
+                }
+
+                PrintGraph();
+            }
+            else
+            {
+                ShowWarning("Итератор не установлен!");
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Вы уверены, что хотите выйти?", "Выход", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
 
         /// <summary>
         /// Отображение предупреждения
