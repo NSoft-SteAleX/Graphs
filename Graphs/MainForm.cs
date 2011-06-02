@@ -12,7 +12,7 @@ using GraphsRender.TaskTwo;
 
 namespace GraphsRender
 {
-    public partial class s : Form
+    public partial class MainForm : Form
     {
         /// <summary>
         /// Объект графа
@@ -43,7 +43,7 @@ namespace GraphsRender
         /// <summary>
         /// Конструктор формы
         /// </summary>
-        public s()
+        public MainForm()
         {
             InitializeComponent();
             _iterator = null;

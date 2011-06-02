@@ -1,6 +1,6 @@
 ﻿namespace GraphsRender
 {
-    partial class s
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(s));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.generateButton = new System.Windows.Forms.Button();
             this.genLabel = new System.Windows.Forms.Label();
             this.vertexCountText = new System.Windows.Forms.TextBox();
@@ -63,9 +63,9 @@
             this.taskTwoButton = new System.Windows.Forms.Button();
             this.resetButton = new System.Windows.Forms.Button();
             this.iteratorOperationsBox = new System.Windows.Forms.GroupBox();
+            this.beginIteratorButton = new System.Windows.Forms.Button();
             this.nextIteratorButton = new System.Windows.Forms.Button();
             this.setIteratorButton = new System.Windows.Forms.Button();
-            this.beginIteratorButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.setIteratorVertex = new System.Windows.Forms.Label();
             this.generateBox.SuspendLayout();
@@ -405,6 +405,16 @@
             this.iteratorOperationsBox.TabStop = false;
             this.iteratorOperationsBox.Text = "Операции с итератором";
             // 
+            // beginIteratorButton
+            // 
+            this.beginIteratorButton.Location = new System.Drawing.Point(152, 19);
+            this.beginIteratorButton.Name = "beginIteratorButton";
+            this.beginIteratorButton.Size = new System.Drawing.Size(75, 23);
+            this.beginIteratorButton.TabIndex = 2;
+            this.beginIteratorButton.Text = "На первую";
+            this.beginIteratorButton.UseVisualStyleBackColor = true;
+            this.beginIteratorButton.Click += new System.EventHandler(this.beginIteratorButton_Click);
+            // 
             // nextIteratorButton
             // 
             this.nextIteratorButton.Location = new System.Drawing.Point(83, 19);
@@ -425,16 +435,6 @@
             this.setIteratorButton.UseVisualStyleBackColor = true;
             this.setIteratorButton.Click += new System.EventHandler(this.setIteratorButton_Click);
             // 
-            // beginIteratorButton
-            // 
-            this.beginIteratorButton.Location = new System.Drawing.Point(152, 19);
-            this.beginIteratorButton.Name = "beginIteratorButton";
-            this.beginIteratorButton.Size = new System.Drawing.Size(75, 23);
-            this.beginIteratorButton.TabIndex = 2;
-            this.beginIteratorButton.Text = "На первую";
-            this.beginIteratorButton.UseVisualStyleBackColor = true;
-            this.beginIteratorButton.Click += new System.EventHandler(this.beginIteratorButton_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -453,7 +453,7 @@
             this.setIteratorVertex.TabIndex = 0;
             this.setIteratorVertex.Text = "?";
             // 
-            // s
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -477,7 +477,7 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(630, 610);
             this.MinimumSize = new System.Drawing.Size(630, 610);
-            this.Name = "s";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Рендер Графов";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

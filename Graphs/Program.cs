@@ -13,7 +13,7 @@ namespace GraphsRender
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new s());
+            Application.Run(new MainForm());
         }
     }
 }

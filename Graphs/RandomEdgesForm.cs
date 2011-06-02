@@ -31,7 +31,7 @@ namespace GraphsRender
                 }
                 catch
                 {
-                    s.ShowWarning("Введите числовое значение!");
+                    MainForm.ShowWarning("Введите числовое значение!");
                     randomEdgesText.Text = "0";
                 }
             }
